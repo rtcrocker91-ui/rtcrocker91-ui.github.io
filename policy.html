@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Intellectual Property Policy — Dancing Tomato Studio</title>
+<title>Dancing Tomato Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -20,6 +20,34 @@
     --sans:'DM Sans',system-ui,sans-serif;
   }
 
+  /* ── GATE ── */
+  #gate {
+    position:fixed; inset:0; background:var(--cream);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    z-index:1000;
+  }
+  #gate-logo { font-family:var(--serif); font-size:1.4rem; letter-spacing:0.04em; color:var(--ink); margin-bottom:2rem; }
+  #gate-heading { font-family:var(--sans); font-size:0.72rem; font-weight:300; color:var(--muted); margin-bottom:2.5rem; text-align:center; letter-spacing:0.18em; text-transform:uppercase; }
+  #gate-form { display:flex; flex-direction:column; align-items:center; gap:0.8rem; width:260px; }
+  #gate-input {
+    width:100%; background:none; border:none; border-bottom:0.5px solid var(--border-c);
+    padding:0.6rem 0; font-family:var(--sans); font-size:0.95rem; font-weight:300;
+    color:var(--ink); outline:none; text-align:center; letter-spacing:0.1em; transition:border-color 0.2s;
+  }
+  #gate-input:focus { border-color:var(--ink); }
+  #gate-input::placeholder { color:var(--gold); letter-spacing:0.08em; }
+  #gate-btn {
+    font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase;
+    background:var(--green); border:none;
+    color:#fff; padding:0.85rem 2.5rem; cursor:pointer;
+    font-family:var(--sans); font-weight:300; transition:background 0.2s; margin-top:0.6rem;
+  }
+  #gate-btn:hover { background:var(--accent); }
+  #gate-error { font-size:0.78rem; color:var(--accent); font-family:var(--sans); font-weight:300; opacity:0; transition:opacity 0.3s; min-height:1.2rem; }
+  #gate-error.show { opacity:1; }
+
+  /* ── SITE ── */
+  #site { display:none; }
   body { background:var(--cream); color:var(--ink); font-family:var(--sans); font-weight:300; }
 
   nav {
@@ -27,207 +55,299 @@
     padding:1.5rem 3rem; border-bottom:0.5px solid var(--border-c);
     position:sticky; top:0; background:var(--cream); z-index:10;
   }
-  .nav-logo {
-    font-family:var(--serif); font-size:1.1rem; letter-spacing:0.02em;
-    color:var(--ink); text-decoration:none;
-  }
-  .nav-back {
-    font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--muted); text-decoration:none; transition:color 0.2s;
-  }
-  .nav-back:hover { color:var(--ink); }
+  .nav-logo { font-family:var(--serif); font-size:1.1rem; letter-spacing:0.02em; color:var(--ink); }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a { font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--ink); }
 
-  .policy-wrap {
-    max-width:720px; margin:0 auto;
-    padding:5rem 3rem 6rem;
-  }
+  section { display:none; }
+  section.active { display:block; }
 
-  .policy-eyebrow {
-    font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:1.2rem;
+  /* HERO */
+  .hero {
+    display:flex; flex-direction:column; justify-content:flex-end;
+    min-height:50vh; padding:4rem 3rem;
+    border-bottom:0.5px solid var(--border-c);
   }
-
-  .policy-title {
-    font-family:var(--serif); font-size:clamp(2rem,4vw,3rem);
-    font-weight:400; line-height:1.1; margin-bottom:0.8rem; color:var(--ink);
+  .hero-eyebrow { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; }
+  .hero-title {
+    font-family:var(--serif); font-size:clamp(3.5rem,7vw,6.5rem);
+    font-weight:400; line-height:1.05; margin-bottom:2.5rem;
+    color:var(--ink); max-width:880px;
   }
+  .hero-title em { font-style:italic; color:var(--accent); }
+  .hero-footer { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; }
+  .hero-sub { font-size:0.9rem; line-height:1.75; color:var(--muted); max-width:340px; }
 
-  .policy-date {
-    font-size:0.78rem; color:var(--muted); margin-bottom:3.5rem;
-    padding-bottom:2.5rem; border-bottom:0.5px solid var(--border-c);
+  .btn-link {
+    display:inline-block; font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink); text-decoration:none; border:none; border-bottom:1px solid var(--ink);
+    padding-bottom:2px; background:none; cursor:pointer; transition:color 0.2s,border-color 0.2s;
+    white-space:nowrap; flex-shrink:0;
   }
+  .btn-link:hover { color:var(--accent); border-color:var(--accent); }
 
-  .policy-section { margin-bottom:3rem; }
+  /* INFO STRIP */
+  .info-strip { display:grid; grid-template-columns:1fr 1fr 1fr; border-top:0.5px solid var(--border-c); }
+  .info-cell { padding:2.5rem 3rem; }
+  .info-cell:not(:last-child) { border-right:0.5px solid var(--border-c); }
+  .info-eyebrow { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .info-body { font-family:var(--serif); font-size:1.15rem; line-height:1.65; color:var(--ink); }
 
-  .policy-section h2 {
-    font-family:var(--serif); font-size:1.3rem; font-weight:400;
-    color:var(--ink); margin-bottom:1rem;
+  /* PORTFOLIO */
+  .section-header { padding:4rem 3rem 2rem; border-bottom:0.5px solid var(--border-c); }
+  .section-eyebrow { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+  .section-title { font-family:var(--serif); font-size:2.2rem; font-weight:400; color:var(--ink); }
+  .portfolio-grid { display:grid; grid-template-columns:1fr 1fr; }
+  .portfolio-item { border-bottom:0.5px solid var(--border-c); }
+  .portfolio-item:nth-child(odd) { border-right:0.5px solid var(--border-c); }
+  .port-placeholder {
+    aspect-ratio:3/4; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; opacity:0.25;
   }
-
-  .policy-section p {
-    font-size:0.92rem; line-height:1.85; color:var(--ink);
-    margin-bottom:1rem; opacity:0.85;
+  .port-placeholder span {
+    font-family:var(--serif); font-style:italic; font-size:0.9rem;
+    color:var(--ink); letter-spacing:0.04em;
   }
+  .portfolio-meta { padding:1.5rem 2rem; border-top:0.5px solid var(--border-c); }
+  .portfolio-client { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem; }
+  .portfolio-name { font-family:var(--serif); font-size:1.3rem; font-weight:400; color:var(--ink); }
 
-  .policy-section ul {
-    margin:0.5rem 0 1rem 0; padding-left:1.2rem;
-  }
+  /* ABOUT */
+  .about-text-only { padding:5rem 3rem; max-width:680px; }
+  .about-text-only p { font-family:var(--serif); font-size:1.2rem; line-height:1.75; color:var(--ink); margin-bottom:1.5rem; }
+  .about-text-only .detail { font-size:0.85rem; font-family:var(--sans); font-weight:300; color:var(--muted); line-height:1.8; margin-top:0; }
+  .clients-list { margin-top:2.5rem; padding-top:2rem; border-top:0.5px solid var(--border-c); }
+  .clients-eyebrow { font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+  .clients-names { font-family:var(--serif); font-size:1.4rem; line-height:1.6; color:var(--ink); }
 
-  .policy-section ul li {
-    font-size:0.92rem; line-height:1.85; color:var(--ink);
-    opacity:0.85; margin-bottom:0.4rem;
+  /* CONTACT */
+  .contact-wrap { display:grid; grid-template-columns:1fr 1fr; min-height:85vh; }
+  .contact-left { padding:5rem 4rem; border-right:0.5px solid var(--border-c); display:flex; flex-direction:column; justify-content:center; }
+  .contact-left h2 { font-family:var(--serif); font-size:2.8rem; font-weight:400; line-height:1.15; margin-bottom:1.5rem; color:var(--ink); }
+  .contact-left h2 em { font-style:italic; color:var(--accent); }
+  .contact-left p { font-size:0.9rem; color:var(--muted); line-height:1.8; max-width:320px; margin-bottom:2rem; }
+  .contact-email { font-family:var(--serif); font-size:1.1rem; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--border-c); padding-bottom:2px; transition:all 0.2s; }
+  .contact-email:hover { color:var(--accent); border-color:var(--accent); }
+  .contact-right { padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; }
+  .form-field { margin-bottom:1.8rem; }
+  .form-label { display:block; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .form-input,.form-textarea {
+    width:100%; background:none; border:none; border-bottom:0.5px solid var(--border-c);
+    padding:0.6rem 0; font-family:var(--sans); font-size:0.9rem; font-weight:300;
+    color:var(--ink); outline:none; transition:border-color 0.2s;
   }
+  .form-input:focus,.form-textarea:focus { border-color:var(--ink); }
+  .form-textarea { resize:none; height:80px; }
+  .form-submit {
+    margin-top:0.5rem; font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    background:var(--green); color:var(--cream); border:none; padding:0.9rem 2rem;
+    cursor:pointer; transition:background 0.2s; font-family:var(--sans);
+  }
+  .form-submit:hover { background:var(--accent); }
 
-  .policy-divider {
-    border:none; border-top:0.5px solid var(--border-c);
-    margin:2.5rem 0;
-  }
-
-  .policy-highlight {
-    border-left:2px solid var(--accent);
-    padding:1.2rem 1.5rem; margin:2rem 0;
-    background:#FFF8F5;
-  }
-
-  .policy-highlight p {
-    font-family:var(--serif); font-size:1.05rem;
-    line-height:1.7; color:var(--ink); opacity:1; margin:0;
-  }
-
-  footer {
-    border-top:0.5px solid var(--border-c); padding:1.5rem 3rem;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  footer p { font-size:0.75rem; color:var(--muted); }
+  footer { border-top:0.5px solid var(--border-c); padding:1.5rem 3rem; display:flex; align-items:center; justify-content:space-between; }
+  footer p, footer a { font-size:0.75rem; color:var(--muted); text-decoration:none; }
+  footer a:hover { color:var(--ink); }
 
   @media (max-width: 768px) {
     nav { padding:1.2rem 1.5rem; }
     .nav-logo { font-size:0.95rem; }
-    .policy-wrap { padding:3rem 1.5rem 4rem; }
-    footer { padding:1.2rem 1.5rem; }
+    .nav-links { gap:1.2rem; }
+    .nav-links a { font-size:0.7rem; }
+
+    .hero { padding:2.5rem 1.5rem; min-height:40vh; }
+    .hero-title { font-size:2.6rem; margin-bottom:2rem; }
+    .hero-footer { flex-direction:column; align-items:flex-start; gap:1.5rem; }
+
+    .info-strip { grid-template-columns:1fr; }
+    .info-cell { padding:1.8rem 1.5rem; border-right:none !important; border-bottom:0.5px solid var(--border-c); }
+    .info-cell:last-child { border-bottom:none; }
+
+    .portfolio-grid { grid-template-columns:1fr; }
+    .portfolio-item:nth-child(odd) { border-right:none; }
+    .section-header { padding:2.5rem 1.5rem 1.5rem; }
+
+    .about-text-only { padding:3rem 1.5rem; }
+
+    .contact-wrap { grid-template-columns:1fr; min-height:auto; }
+    .contact-left { padding:3rem 1.5rem; border-right:none; border-bottom:0.5px solid var(--border-c); }
+    .contact-left h2 { font-size:2rem; }
+    .contact-right { padding:3rem 1.5rem; }
+
+    footer { padding:1.2rem 1.5rem; flex-direction:column; gap:0.5rem; align-items:flex-start; }
+
+    #gate-logo { font-size:1.1rem; }
+    #gate-heading { font-size:0.68rem; }
   }
 </style>
 </head>
 <body>
 
+<!-- GATE -->
+<div id="gate">
+  <p id="gate-logo">Dancing Tomato Studio</p>
+  <p id="gate-heading">Coming soon</p>
+  <div id="gate-form">
+    <input id="gate-input" type="password" placeholder="password" autocomplete="off">
+    <p id="gate-error">Incorrect password — try again</p>
+    <button id="gate-btn" onclick="checkPassword()">Enter</button>
+  </div>
+</div>
+
+<!-- SITE -->
+<div id="site">
+
 <nav>
-  <a href="/" class="nav-logo">Dancing Tomato Studio</a>
-  <a href="/" class="nav-back">← Back</a>
+  <span class="nav-logo">Dancing Tomato Studio</span>
+  <ul class="nav-links">
+    <li><a href="#" onclick="show('home');return false;">Home</a></li>
+    <li><a href="#" onclick="show('portfolio');return false;">Work</a></li>
+    <li><a href="#" onclick="show('about');return false;">About</a></li>
+    <li><a href="#" onclick="show('contact');return false;">Contact</a></li>
+  </ul>
 </nav>
 
-<div class="policy-wrap">
-
-  <p class="policy-eyebrow">Legal</p>
-  <h1 class="policy-title">Intellectual Property &amp; Copyright Policy</h1>
-  <p class="policy-date">Effective date: June 2026</p>
-
-  <div class="policy-highlight">
-    <p>All work created by Dancing Tomato Studio is original and protected by copyright law. No work may be copied, reproduced, or used without explicit written permission.</p>
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero">
+    <p class="hero-eyebrow">Custom Pattern Design Studio</p>
+    <h1 class="hero-title">Patterns made<br>to be <em>distinctly</em><br>yours</h1>
+    <div class="hero-footer">
+      <p class="hero-sub">Bespoke surface pattern design for brands and individuals who want something original — built from scratch, made to last.</p>
+      <button class="btn-link" onclick="show('portfolio')">View work</button>
+    </div>
   </div>
-
-  <div class="policy-section">
-    <h2>Ownership of work</h2>
-    <p>All surface patterns, designs, illustrations, concepts, and visual assets created by Dancing Tomato Studio are the sole intellectual property of Dancing Tomato Studio, unless explicitly transferred in writing through a signed licensing or work-for-hire agreement.</p>
-    <p>The creation of a pattern or design does not transfer ownership to the client until full payment has been received and a written transfer of rights has been executed.</p>
+  <div class="info-strip">
+    <div class="info-cell">
+      <p class="info-eyebrow">What we do</p>
+      <p class="info-body">Original surface patterns designed around your brand's visual language.</p>
+    </div>
+    <div class="info-cell">
+      <p class="info-eyebrow">For whom</p>
+      <p class="info-body">Brands, publications, packaging, and individuals with an eye for detail.</p>
+    </div>
+    <div class="info-cell">
+      <p class="info-eyebrow">Ready to begin?</p>
+      <button onclick="show('contact')" style="margin-top:0.3rem;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--green);color:#fff;border:none;padding:0.85rem 2rem;cursor:pointer;font-family:var(--sans);font-weight:300;transition:background 0.2s;" onmouseover="this.style.background='var(--accent)'" onmouseout="this.style.background='var(--green)'">Start a project</button>
+    </div>
   </div>
+</section>
 
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>What is prohibited</h2>
-    <p>Without prior written consent from Dancing Tomato Studio, the following are strictly prohibited:</p>
-    <ul>
-      <li>Reproducing, copying, or tracing any design — in whole or in part</li>
-      <li>Using any design for commercial purposes without a valid license</li>
-      <li>Reselling, sublicensing, or redistributing any design to third parties</li>
-      <li>Modifying or creating derivative works based on any Dancing Tomato Studio design</li>
-      <li>Screenshotting, downloading, or saving designs from this website for use outside of personal reference</li>
-      <li>Claiming any Dancing Tomato Studio design as your own work</li>
-    </ul>
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header">
+    <p class="section-eyebrow">Selected work</p>
+    <h2 class="section-title">Recent commissions</h2>
   </div>
+  <div class="portfolio-grid">
 
-  <hr class="policy-divider">
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Daily Nutmeg</p>
+        <p class="portfolio-name">Editorial repeat, 2024</p>
+      </div>
+    </div>
 
-  <div class="policy-section">
-    <h2>Client commissions</h2>
-    <p>When a client commissions a pattern, the scope of use is defined in the project agreement. Unless otherwise agreed in writing:</p>
-    <ul>
-      <li>Dancing Tomato Studio retains the right to display the work in its portfolio</li>
-      <li>The client receives a license to use the design for the agreed purpose only</li>
-      <li>Exclusive ownership transfers only if explicitly negotiated and reflected in the project fee</li>
-      <li>Unauthorized expansion of use beyond the agreed scope requires a new license agreement</li>
-    </ul>
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Pirate Audio</p>
+        <p class="portfolio-name">Packaging surface, 2024</p>
+      </div>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Available</p>
+        <p class="portfolio-name"><em style="font-family:'EB Garamond',serif;font-style:italic;color:var(--muted);">Your project here</em></p>
+      </div>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Available</p>
+        <p class="portfolio-name"><em style="font-family:'EB Garamond',serif;font-style:italic;color:var(--muted);">Your project here</em></p>
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>Website content</h2>
-    <p>All content on this website — including but not limited to pattern designs, text, layout, and visual identity — is protected by copyright. Unauthorized use of any content from this site is a violation of applicable intellectual property laws and may result in legal action.</p>
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text-only">
+    <p style="font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;font-family:var(--sans);font-weight:300;">About the studio</p>
+    <p>Dancing Tomato Studio is an independent pattern design practice creating bespoke surface patterns for brands, publications, and individuals.</p>
+    <p>Every pattern starts from scratch — drawn from your visual world, your color story, your personality. No stock. No recycled motifs. Just work made for you.</p>
+    <p class="detail">Based in the Northeast, working with clients everywhere.</p>
+    <div class="clients-list">
+      <p class="clients-eyebrow">Past &amp; current clients</p>
+      <p class="clients-names">Daily Nutmeg<br>Pirate Audio</p>
+    </div>
   </div>
+</section>
 
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>Reporting infringement</h2>
-    <p>If you believe your intellectual property rights have been violated, or if you become aware of any unauthorized use of Dancing Tomato Studio's work, please get in touch so we can address it promptly.</p>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <h2>Let's make<br>something <em>new</em></h2>
+      <p>Tell us about your project — brand, product, publication, or personal commission. We'll take it from there.</p>
+    </div>
+    <div class="contact-right">
+      <div class="form-field">
+        <label class="form-label">Your name</label>
+        <input class="form-input" type="text" placeholder="Full name">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="you@company.com">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Tell us about your project</label>
+        <textarea class="form-textarea" placeholder="Brand, timeline, what you have in mind…"></textarea>
+      </div>
+      <button class="form-submit">Send inquiry</button>
+    </div>
   </div>
-
-
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>Mood boards, concepts &amp; early work</h2>
-    <p>Copyright protection applies to all stages of the creative process, not only finished designs. This includes but is not limited to:</p>
-    <ul>
-      <li>Mood boards, color studies, and reference collections assembled for a project</li>
-      <li>Initial sketches, rough concepts, and exploratory directions</li>
-      <li>Presentation decks and design proposals shared with clients</li>
-      <li>Any work-in-progress shared for feedback or approval</li>
-    </ul>
-    <p>These materials are shared in confidence as part of the creative process and may not be used, shared, or reproduced without written permission, regardless of whether the project proceeds to completion.</p>
-  </div>
-
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>Social media &amp; public credit</h2>
-    <p>When sharing or publishing work created by Dancing Tomato Studio on social media, websites, press materials, or any other public platform, clients are required to credit Dancing Tomato Studio as the designer.</p>
-    <p>Accepted forms of credit include:</p>
-    <ul>
-      <li>Tagging <strong>@dancingtomatostudio</strong> on Instagram or other social platforms</li>
-      <li>Including "Pattern design by Dancing Tomato Studio" in captions or credits</li>
-      <li>Linking to <strong>dancingtomatostudio.com</strong> where text-based credit is appropriate</li>
-    </ul>
-    <p>Failure to credit Dancing Tomato Studio when publishing commissioned work is a violation of our project terms and may affect future collaboration.</p>
-  </div>
-
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>Payment &amp; file release</h2>
-    <p>Final files are not released until payment has been received in full. This applies to all deliverables including pattern files, repeat files, color variations, and any other assets produced as part of a project.</p>
-    <ul>
-      <li>Work-in-progress files and previews shared during the project are for approval purposes only and do not constitute final delivery</li>
-      <li>Rights to use the work do not transfer until full payment has cleared</li>
-      <li>Any use of work-in-progress files prior to full payment and formal delivery is unauthorized</li>
-      <li>In the event of non-payment, Dancing Tomato Studio retains all rights to the work and may pursue recovery of fees owed</li>
-    </ul>
-  </div>
-
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>Governing law</h2>
-    <p>This policy is governed by the copyright laws of the United States, including the Digital Millennium Copyright Act (DMCA). Dancing Tomato Studio reserves the right to pursue all available legal remedies in the event of infringement.</p>
-  </div>
-
-</div>
+</section>
 
 <footer>
   <p>© 2026 Dancing Tomato Studio</p>
-  <p>All rights reserved.</p>
+  <a href="/policy.html">Intellectual Property Policy</a>
 </footer>
 
+</div>
+
+<script>
+const PASSWORD='littlestinky';
+
+function checkPassword(){
+  const val=document.getElementById('gate-input').value;
+  const err=document.getElementById('gate-error');
+  if(val===PASSWORD){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('site').style.display='block';
+  } else {
+    err.classList.add('show');
+    document.getElementById('gate-input').value='';
+    setTimeout(()=>err.classList.remove('show'),2500);
+  }
+}
+
+document.getElementById('gate-input').addEventListener('keydown',e=>{
+  if(e.key==='Enter') checkPassword();
+});
+
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
 </body>
 </html>
