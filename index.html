@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dancing Tomato Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --cream:#FFFFFF;
+    --ink:#1C0C08;
+    --muted:#9A8050;
+    --accent:#D85028;
+    --gold:#F4D080;
+    --green:#3A7048;
+    --border-c:#E8E0D0;
+    --serif:'EB Garamond',Georgia,serif;
+    --sans:'DM Sans',system-ui,sans-serif;
+  }
+
+  /* ── GATE ── */
+  #gate {
+    position:fixed; inset:0; background:var(--cream);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    z-index:1000;
+  }
+  #gate-logo { font-family:var(--serif); font-size:1.4rem; letter-spacing:0.04em; color:var(--ink); margin-bottom:3rem; }
+  #gate-heading { font-family:var(--serif); font-size:2.6rem; font-weight:400; color:var(--ink); margin-bottom:0.6rem; text-align:center; line-height:1.15; }
+  #gate-heading em { font-style:italic; color:var(--accent); }
+  #gate-sub { font-family:var(--sans); font-weight:300; font-size:0.9rem; color:var(--muted); margin-bottom:2.5rem; text-align:center; line-height:1.7; }
+  #gate-form { display:flex; flex-direction:column; align-items:center; gap:0.8rem; width:260px; }
+  #gate-input {
+    width:100%; background:none; border:none; border-bottom:0.5px solid var(--border-c);
+    padding:0.6rem 0; font-family:var(--sans); font-size:0.95rem; font-weight:300;
+    color:var(--ink); outline:none; text-align:center; letter-spacing:0.1em; transition:border-color 0.2s;
+  }
+  #gate-input:focus { border-color:var(--ink); }
+  #gate-input::placeholder { color:var(--gold); letter-spacing:0.08em; }
+  #gate-btn {
+    font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase;
+    background:none; border:none; border-bottom:1px solid var(--ink);
+    color:var(--ink); padding-bottom:2px; cursor:pointer;
+    font-family:var(--sans); font-weight:300; transition:color 0.2s,border-color 0.2s; margin-top:0.4rem;
+  }
+  #gate-btn:hover { color:var(--accent); border-color:var(--accent); }
+  #gate-error { font-size:0.78rem; color:var(--accent); font-family:var(--sans); font-weight:300; opacity:0; transition:opacity 0.3s; min-height:1.2rem; }
+  #gate-error.show { opacity:1; }
+
+  /* ── SITE ── */
+  #site { display:none; }
+  body { background:var(--cream); color:var(--ink); font-family:var(--sans); font-weight:300; }
+
+  nav {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.5rem 3rem; border-bottom:0.5px solid var(--border-c);
+    position:sticky; top:0; background:var(--cream); z-index:10;
+  }
+  .nav-logo { font-family:var(--serif); font-size:1.1rem; letter-spacing:0.02em; color:var(--ink); }
+  .nav-links { display:flex; gap:2.5rem; list-style:none; }
+  .nav-links a { font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--ink); }
+
+  section { display:none; }
+  section.active { display:block; }
+
+  /* HERO */
+  .hero {
+    display:flex; flex-direction:column; justify-content:flex-end;
+    min-height:88vh; padding:4rem 3rem;
+    border-bottom:0.5px solid var(--border-c);
+  }
+  .hero-eyebrow { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:1.5rem; }
+  .hero-title {
+    font-family:var(--serif); font-size:clamp(3.5rem,7vw,6.5rem);
+    font-weight:400; line-height:1.05; margin-bottom:2.5rem;
+    color:var(--ink); max-width:880px;
+  }
+  .hero-title em { font-style:italic; color:var(--accent); }
+  .hero-footer { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; }
+  .hero-sub { font-size:0.9rem; line-height:1.75; color:var(--muted); max-width:340px; }
+
+  .btn-link {
+    display:inline-block; font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink); text-decoration:none; border:none; border-bottom:1px solid var(--ink);
+    padding-bottom:2px; background:none; cursor:pointer; transition:color 0.2s,border-color 0.2s;
+    white-space:nowrap; flex-shrink:0;
+  }
+  .btn-link:hover { color:var(--accent); border-color:var(--accent); }
+
+  /* INFO STRIP */
+  .info-strip { display:grid; grid-template-columns:1fr 1fr 1fr; border-top:0.5px solid var(--border-c); }
+  .info-cell { padding:2.5rem 3rem; }
+  .info-cell:not(:last-child) { border-right:0.5px solid var(--border-c); }
+  .info-eyebrow { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .info-body { font-family:var(--serif); font-size:1.15rem; line-height:1.65; color:var(--ink); }
+
+  /* PORTFOLIO */
+  .section-header { padding:4rem 3rem 2rem; border-bottom:0.5px solid var(--border-c); }
+  .section-eyebrow { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+  .section-title { font-family:var(--serif); font-size:2.2rem; font-weight:400; color:var(--ink); }
+  .portfolio-grid { display:grid; grid-template-columns:1fr 1fr; }
+  .portfolio-item { border-bottom:0.5px solid var(--border-c); }
+  .portfolio-item:nth-child(odd) { border-right:0.5px solid var(--border-c); }
+  .port-placeholder {
+    aspect-ratio:3/4; background:var(--gold);
+    display:flex; align-items:center; justify-content:center; opacity:0.25;
+  }
+  .port-placeholder span {
+    font-family:var(--serif); font-style:italic; font-size:0.9rem;
+    color:var(--ink); letter-spacing:0.04em;
+  }
+  .portfolio-meta { padding:1.5rem 2rem; border-top:0.5px solid var(--border-c); }
+  .portfolio-client { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem; }
+  .portfolio-name { font-family:var(--serif); font-size:1.3rem; font-weight:400; color:var(--ink); }
+
+  /* ABOUT */
+  .about-text-only { padding:5rem 3rem; max-width:680px; }
+  .about-text-only p { font-family:var(--serif); font-size:1.2rem; line-height:1.75; color:var(--ink); margin-bottom:1.5rem; }
+  .about-text-only .detail { font-size:0.85rem; font-family:var(--sans); font-weight:300; color:var(--muted); line-height:1.8; margin-top:0; }
+  .clients-list { margin-top:2.5rem; padding-top:2rem; border-top:0.5px solid var(--border-c); }
+  .clients-eyebrow { font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; }
+  .clients-names { font-family:var(--serif); font-size:1.4rem; line-height:1.6; color:var(--ink); }
+
+  /* CONTACT */
+  .contact-wrap { display:grid; grid-template-columns:1fr 1fr; min-height:85vh; }
+  .contact-left { padding:5rem 4rem; border-right:0.5px solid var(--border-c); display:flex; flex-direction:column; justify-content:center; }
+  .contact-left h2 { font-family:var(--serif); font-size:2.8rem; font-weight:400; line-height:1.15; margin-bottom:1.5rem; color:var(--ink); }
+  .contact-left h2 em { font-style:italic; color:var(--accent); }
+  .contact-left p { font-size:0.9rem; color:var(--muted); line-height:1.8; max-width:320px; margin-bottom:2rem; }
+  .contact-email { font-family:var(--serif); font-size:1.1rem; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--border-c); padding-bottom:2px; transition:all 0.2s; }
+  .contact-email:hover { color:var(--accent); border-color:var(--accent); }
+  .contact-right { padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; }
+  .form-field { margin-bottom:1.8rem; }
+  .form-label { display:block; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .form-input,.form-textarea {
+    width:100%; background:none; border:none; border-bottom:0.5px solid var(--border-c);
+    padding:0.6rem 0; font-family:var(--sans); font-size:0.9rem; font-weight:300;
+    color:var(--ink); outline:none; transition:border-color 0.2s;
+  }
+  .form-input:focus,.form-textarea:focus { border-color:var(--ink); }
+  .form-textarea { resize:none; height:80px; }
+  .form-submit {
+    margin-top:0.5rem; font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    background:var(--green); color:var(--cream); border:none; padding:0.9rem 2rem;
+    cursor:pointer; transition:background 0.2s; font-family:var(--sans);
+  }
+  .form-submit:hover { background:var(--accent); }
+
+  footer { border-top:0.5px solid var(--border-c); padding:1.5rem 3rem; display:flex; align-items:center; justify-content:space-between; }
+  footer p, footer a { font-size:0.75rem; color:var(--muted); text-decoration:none; }
+  footer a:hover { color:var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <p id="gate-logo">Dancing Tomato Studio</p>
+  <h1 id="gate-heading">Something <em>beautiful</em><br>is on its way</h1>
+  <p id="gate-sub">Custom pattern design for brands &amp; individuals.<br>Enter the password to preview.</p>
+  <div id="gate-form">
+    <input id="gate-input" type="password" placeholder="password" autocomplete="off">
+    <p id="gate-error">Incorrect password — try again</p>
+    <button id="gate-btn" onclick="checkPassword()">Enter</button>
+  </div>
+</div>
+
+<!-- SITE -->
+<div id="site">
+
+<nav>
+  <span class="nav-logo">Dancing Tomato Studio</span>
+  <ul class="nav-links">
+    <li><a href="#" onclick="show('home');return false;">Home</a></li>
+    <li><a href="#" onclick="show('portfolio');return false;">Work</a></li>
+    <li><a href="#" onclick="show('about');return false;">About</a></li>
+    <li><a href="#" onclick="show('contact');return false;">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero">
+    <p class="hero-eyebrow">Custom Pattern Design Studio</p>
+    <h1 class="hero-title">Patterns made<br>to be <em>distinctly</em><br>yours</h1>
+    <div class="hero-footer">
+      <p class="hero-sub">Bespoke surface pattern design for brands and individuals who want something original — built from scratch, made to last.</p>
+      <button class="btn-link" onclick="show('portfolio')">View work</button>
+    </div>
+  </div>
+  <div class="info-strip">
+    <div class="info-cell">
+      <p class="info-eyebrow">What we do</p>
+      <p class="info-body">Original surface patterns designed around your brand's visual language.</p>
+    </div>
+    <div class="info-cell">
+      <p class="info-eyebrow">For whom</p>
+      <p class="info-body">Brands, publications, packaging, and individuals with an eye for detail.</p>
+    </div>
+    <div class="info-cell">
+      <p class="info-eyebrow">Ready to begin?</p>
+      <button onclick="show('contact')" style="margin-top:0.3rem;font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--green);color:#fff;border:none;padding:0.85rem 2rem;cursor:pointer;font-family:var(--sans);font-weight:300;transition:background 0.2s;" onmouseover="this.style.background='var(--accent)'" onmouseout="this.style.background='var(--green)'">Start a project</button>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header">
+    <p class="section-eyebrow">Selected work</p>
+    <h2 class="section-title">Recent commissions</h2>
+  </div>
+  <div class="portfolio-grid">
+
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Daily Nutmeg</p>
+        <p class="portfolio-name">Editorial repeat, 2024</p>
+      </div>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Pirate Audio</p>
+        <p class="portfolio-name">Packaging surface, 2024</p>
+      </div>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Available</p>
+        <p class="portfolio-name"><em style="font-family:'EB Garamond',serif;font-style:italic;color:var(--muted);">Your project here</em></p>
+      </div>
+    </div>
+
+    <div class="portfolio-item">
+      <div class="port-placeholder"><span>Image coming soon</span></div>
+      <div class="portfolio-meta">
+        <p class="portfolio-client">Available</p>
+        <p class="portfolio-name"><em style="font-family:'EB Garamond',serif;font-style:italic;color:var(--muted);">Your project here</em></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text-only">
+    <p class="section-eyebrow" style="font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">About the studio</p>
+    <p>Dancing Tomato Studio is an independent pattern design practice creating bespoke surface patterns for brands, publications, and individuals.</p>
+    <p>Every pattern starts from scratch — drawn from your visual world, your color story, your personality. No stock. No recycled motifs. Just work made for you.</p>
+    <p class="detail">Based in the Northeast, working with clients everywhere.</p>
+    <div class="clients-list">
+      <p class="clients-eyebrow">Past &amp; current clients</p>
+      <p class="clients-names">Daily Nutmeg<br>Pirate Audio</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <h2>Let's make<br>something <em>new</em></h2>
+      <p>Tell us about your project — brand, product, publication, or personal commission. We'll take it from there.</p>
+      <a href="mailto:hello@dancingtomatostudio.com" class="contact-email">hello@dancingtomatostudio.com</a>
+    </div>
+    <div class="contact-right">
+      <div class="form-field">
+        <label class="form-label">Your name</label>
+        <input class="form-input" type="text" placeholder="Full name">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="you@company.com">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Tell us about your project</label>
+        <textarea class="form-textarea" placeholder="Brand, timeline, what you have in mind…"></textarea>
+      </div>
+      <button class="form-submit">Send inquiry</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Dancing Tomato Studio</p>
+  <a href="mailto:hello@dancingtomatostudio.com">hello@dancingtomatostudio.com</a>
+</footer>
+
+</div>
+
+<script>
+const PASSWORD='littlestinky';
+
+function checkPassword(){
+  const val=document.getElementById('gate-input').value;
+  const err=document.getElementById('gate-error');
+  if(val===PASSWORD){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('site').style.display='block';
+  } else {
+    err.classList.add('show');
+    document.getElementById('gate-input').value='';
+    setTimeout(()=>err.classList.remove('show'),2500);
+  }
+}
+
+document.getElementById('gate-input').addEventListener('keydown',e=>{
+  if(e.key==='Enter') checkPassword();
+});
+
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
