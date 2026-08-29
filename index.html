@@ -93,8 +93,8 @@
     display:flex; flex-direction:column; gap:1rem;
   }
   .home-arm:last-child { border-right:none; }
-  .home-arm-eyebrow { font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); }
-  .home-arm-title { font-family:var(--serif); font-size:1.5rem; font-weight:400; color:var(--ink); }
+  .home-arm-eyebrow { font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink); }
+  .home-arm-title { font-family:var(--sans); font-size:0.85rem; font-weight:400; color:var(--ink); letter-spacing:0.14em; text-transform:uppercase; }
   .home-arm-body { font-size:0.88rem; line-height:1.75; color:var(--muted); flex:1; }
   .home-arm-link { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); border-bottom:0.5px solid var(--ink); padding-bottom:2px; cursor:pointer; transition:color 0.2s; width:fit-content; }
   .home-arm-link:hover { color:var(--accent); border-color:var(--accent); }
@@ -172,7 +172,7 @@
   .about-image { background:var(--border); display:flex; align-items:center; justify-content:center; border-right:0.5px solid var(--border); }
   .about-image span { font-family:var(--serif); font-style:italic; font-size:0.9rem; color:var(--muted); }
   .about-text { padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; }
-  .about-text p { font-family:var(--serif); font-size:1.15rem; line-height:1.8; color:var(--ink); margin-bottom:1.5rem; }
+  .about-text p { font-family:var(--sans); font-size:1rem; font-weight:300; line-height:1.8; color:var(--ink); margin-bottom:1.5rem; }
   .about-text .small { font-size:0.85rem; font-family:var(--sans); font-weight:300; color:var(--muted); line-height:1.8; margin-top:0; }
   .about-credentials { margin-top:2rem; padding-top:2rem; border-top:0.5px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
   .credential-label { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
@@ -327,8 +327,8 @@
     <h1 class="home-hero-title">A creative studio<br><em>with a sense of place</em>.</h1>
     <p class="home-hero-sub">Founded in Portland, Maine, Dancing Tomato Studio works across print, illustration, graphic design, and object-making. A studio built for clients and collaborators who care about how things are made.</p>
     <div class="home-hero-actions">
-      <button class="btn-primary" onclick="show('prints')">View prints</button>
-      <button class="btn-green" onclick="show('ceramics')">View ceramics</button>
+      <button class="btn-primary" onclick="show('prints')">Shop prints</button>
+      <button class="btn-green" onclick="show('ceramics')">Shop ceramics</button>
       <button class="btn-ghost" onclick="show('custom')">View custom work</button>
     </div>
   </div>
@@ -336,19 +336,16 @@
   <div class="home-arms">
     <div class="home-arm">
       <p class="home-arm-eyebrow">Portland Prints</p>
-      <h2 class="home-arm-title">The places you know</h2>
       <p class="home-arm-body">Original illustrations of Portland's restaurants, shops, and landmarks — drawn from life, printed as 6″ × 9″ fine art prints, signed.</p>
       <span class="home-arm-link" onclick="show('prints')">Shop prints →</span>
     </div>
     <div class="home-arm">
       <p class="home-arm-eyebrow">Ceramics</p>
-      <h2 class="home-arm-title">Made to use</h2>
       <p class="home-arm-body">Functional objects made to live in your home. Mugs, plates, bowls, and pots — each one finished by hand in Portland, Maine.</p>
-      <span class="home-arm-link" onclick="show('ceramics')">View ceramics →</span>
+      <span class="home-arm-link" onclick="show('ceramics')">Shop ceramics →</span>
     </div>
     <div class="home-arm">
       <p class="home-arm-eyebrow">Custom Work</p>
-      <h2 class="home-arm-title">Made for you</h2>
       <p class="home-arm-body">Illustration, graphic design, and print work — for brands, events, and individuals. Each project is scoped and priced individually.</p>
       <span class="home-arm-link" onclick="show('custom')">See custom work →</span>
     </div>
@@ -387,14 +384,6 @@
       <div class="ceramics-meta"><p class="ceramics-type">Mug</p><p class="ceramics-name">Coming soon</p></div>
     </div>
 
-  <div style="padding:3rem;border-top:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem;">
-    <div>
-      <p class="eyebrow">Commissions</p>
-      <p style="font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--ink);margin-top:0.5rem;">Interested in a custom piece?</p>
-      <p style="font-size:0.9rem;line-height:1.8;color:var(--muted);max-width:400px;margin-top:0.6rem;">Custom ceramic commissions are available on a limited basis. Get in touch to discuss your project.</p>
-    </div>
-    <button class="btn-primary" onclick="show('contact')">Get in touch</button>
-  </div>
 </section>
 
 <!-- ── PORTLAND PRINTS ── -->
@@ -442,7 +431,7 @@
     </div>
     <div class="wholesale-right">
       <p class="eyebrow">For retailers</p>
-      <h3>Stock our <em>prints</em></h3>
+      <h3><em>Stock</em> our prints</h3>
       <p>Carry Portland Prints in your store. A natural fit for gift shops, bookstores, and any Portland retailer looking for something locally made. Wholesale pricing available on minimum order.</p>
       <button class="btn-green" onclick="show('contact')">Get in touch</button>
     </div>
@@ -462,8 +451,8 @@
   <div class="custom-services">
     <div class="custom-service">
       <p class="eyebrow">01</p>
-      <h3 class="custom-service-title">Wedding & event stationery</h3>
-      <p class="custom-service-body">Custom illustrated invitations, menus, signage, and day-of materials. Hand-drawn or digital, designed around your aesthetic and printed to last.</p>
+      <h3 class="custom-service-title">Graphic design</h3>
+      <p class="custom-service-body">Print and digital design — advertisements, brochures, brand materials, and more. Fluent in Adobe Creative Cloud and experienced working with Maine-based brands.</p>
     </div>
     <div class="custom-service">
       <p class="eyebrow">02</p>
@@ -472,8 +461,8 @@
     </div>
     <div class="custom-service">
       <p class="eyebrow">03</p>
-      <h3 class="custom-service-title">Graphic design</h3>
-      <p class="custom-service-body">Print and digital design — advertisements, brochures, brand materials, and more. Fluent in Adobe Creative Cloud and experienced working with Maine-based brands.</p>
+      <h3 class="custom-service-title">Wedding & event stationery</h3>
+      <p class="custom-service-body">Custom illustrated invitations, menus, signage, and day-of materials. Hand-drawn or digital, designed around your aesthetic and printed to last.</p>
     </div>
   </div>
   <div class="custom-grid">
@@ -504,10 +493,9 @@
   <div class="about-wrap">
     <div class="about-image"><span>Image coming soon</span></div>
     <div class="about-text">
-      <p class="eyebrow">About the studio</p>
+      <h2 class="section-title" style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:0.5px solid var(--border);">About the studio</h2>
       <p>Dancing Tomato Studio was founded by Haley Crocker — a Portland, Maine-based artist, designer, and maker with over 15 years of experience working across disciplines.</p>
-      <p>The work spans illustration, graphic design, and ceramics. Connected by a commitment to craft, place, and making things that are genuinely worth keeping. The work is always original — conceived, made, and finished by hand.</p>
-
+      <p>The work spans illustration, graphic design, and ceramics, connected by a commitment to craft, place, and making things that are genuinely worth keeping. The work is always original — conceived, made, and finished by hand.</p>
     </div>
   </div>
 </section>
