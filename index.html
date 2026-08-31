@@ -67,23 +67,8 @@
   .section-header { padding:4rem 3rem 2.5rem; border-bottom:0.5px solid var(--border); }
   .section-title { font-family:var(--serif); font-size:2.2rem; font-weight:400; color:var(--ink); }
 
-  /* ── HOME ── */
-  .home-hero {
-    position:relative;
-  }
-  .home-hero::before {
-    content:'';
-    position:absolute;
-    inset:0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='20' y='50' font-size='16' opacity='0.65' transform='rotate(-12,20,50)'%3E%F0%9F%8D%85%3C/text%3E%3Ctext x='130' y='30' font-size='14' opacity='0.62' transform='rotate(8,130,30)'%3E%F0%9F%8D%85%3C/text%3E%3Ctext x='170' y='140' font-size='18' opacity='0.68' transform='rotate(-5,170,140)'%3E%F0%9F%8D%85%3C/text%3E%3Ctext x='40' y='170' font-size='13' opacity='0.58' transform='rotate(15,40,170)'%3E%F0%9F%8D%85%3C/text%3E%3Ctext x='100' y='200' font-size='15' opacity='0.55' transform='rotate(-8,100,200)'%3E%F0%9F%8D%85%3C/text%3E%3C/svg%3E");
-    background-repeat:repeat;
-    mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, transparent 30%, white 100%);
-    -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, transparent 30%, white 100%);
-    pointer-events:none;
-    z-index:0;
-  }
-  .home-hero > * { position:relative; z-index:1; }
-  #home { }
+    /* ── HOME ── */
+
   .home-hero {
     padding:6rem 3rem 4rem;
     border-bottom:0.5px solid var(--border);
@@ -288,37 +273,11 @@
     footer { padding:1.2rem 1.5rem; flex-direction:column; gap:0.5rem; align-items:flex-start; }
   }
 
-  /* ── TOMATO ROLL ANIMATION ── */
-  #tomato-roll {
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:60px;
-    pointer-events:none;
-    z-index:999;
-    overflow:hidden;
-  }
-  #tomato-emoji {
-    position:absolute;
-    top:50%;
-    font-size:1.4rem;
-    line-height:1;
-    will-change:transform;
-    animation: rollAcross 7s linear forwards;
-  }
-  @keyframes rollAcross {
-    0%   { left:-60px; transform:translateY(-50%) rotate(0deg); }
-    100% { left:calc(100% + 60px); transform:translateY(-50%) rotate(1080deg); }
-  }
-  .nav-logo { opacity:0; transition:opacity 0.6s ease; }
-  .nav-links { opacity:0; transition:opacity 0.6s ease; }
-  .nav-get-in-touch { opacity:0; transition:opacity 0.6s ease; }
-  .nav-logo.nav-visible, .nav-links.nav-visible, .nav-get-in-touch.nav-visible { opacity:1; }
+
 
 </style>
 </head>
 <body>
-
-<div id="tomato-roll"><span id="tomato-emoji">🍅</span></div>
 
 <nav>
   <span class="nav-logo" onclick="show('home')">Dancing Tomato Studio</span>
@@ -576,26 +535,7 @@
 
 <script>
 
-// Tomato roll animation
-(function() {
-  const logo = document.querySelector('.nav-logo');
-  const tomato = document.getElementById('tomato-emoji');
-  const roll = document.getElementById('tomato-roll');
 
-  // Remove roll element after animation completes
-  // Logo fades in halfway through
-  setTimeout(() => {
-    document.querySelector('.nav-logo').classList.add('nav-visible');
-  }, 2000);
-
-  // Rest of nav fades in after tomato passes
-  setTimeout(() => {
-    document.querySelector('.nav-links').classList.add('nav-visible');
-    const cta = document.querySelector('.nav-get-in-touch');
-    if(cta) cta.classList.add('nav-visible');
-    roll.style.display = 'none';
-  }, 7200);
-})();
 
 function openMenu() { document.getElementById('mobileMenu').classList.add('open'); }
 function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
