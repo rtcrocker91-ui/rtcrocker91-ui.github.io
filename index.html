@@ -29,11 +29,14 @@
     padding:1.2rem 2.5rem;
     display:flex; align-items:center; position:sticky;
   }
-  .nav-logo { font-family:var(--serif); font-size:1rem; color:var(--ink); letter-spacing:0.04em; cursor:pointer; white-space:nowrap; font-weight:400; }
-  .nav-left-links { display:flex; gap:2rem; align-items:center; justify-content:flex-start; margin-left:2.5rem; }
-  .nav-right-links { display:flex; gap:2rem; align-items:center; justify-content:flex-end; flex:1; margin-left:auto; }
-  .nav-left-links a, .nav-right-links a { font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; cursor:pointer; white-space:nowrap; font-weight:300; }
-  .nav-left-links a:hover, .nav-right-links a:hover, .nav-left-links a.active, .nav-right-links a.active { color:var(--ink); }
+  .nav-logo { font-family:var(--serif); font-size:1rem; color:var(--ink); letter-spacing:0.04em; cursor:pointer; white-space:nowrap; font-weight:400; margin-right:2rem; }
+  .nav-left-links { display:flex; gap:2rem; align-items:center; flex:1; }
+  .nav-right-links { display:flex; align-items:center; margin-left:auto; }
+  .nav-left-links a, .nav-right-links a { font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; cursor:pointer; white-space:nowrap; font-family:var(--sans); font-weight:300; }
+  .nav-left-links a:hover, .nav-left-links a.active { color:var(--ink); }
+  .nav-links-group { display:flex; gap:2rem; align-items:center; margin-left:2.5rem; flex:1; }
+  .nav-links-group a { font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; cursor:pointer; white-space:nowrap; font-weight:300; }
+  .nav-links-group a:hover, .nav-links-group a.active { color:var(--ink); }
   .nav-links a { font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; cursor:pointer; white-space:nowrap; }
   .nav-links a:hover, .nav-links a.active { color:var(--ink); }
 
@@ -235,8 +238,7 @@
   @media(max-width:768px){
     nav { padding:1rem 1.5rem; }
     .nav-logo { font-size:0.9rem; }
-    .nav-left-links { display:none; }
-    .nav-right-links { display:none; }
+    .nav-links-group { display:none; }
     .nav-get-in-touch { display:none; }
     .hamburger { display:flex; }
 
