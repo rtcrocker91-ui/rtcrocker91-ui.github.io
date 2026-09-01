@@ -115,6 +115,10 @@
     display:flex; align-items:center; justify-content:center;
     position:relative;
   }
+  .ceramics-placeholder img {
+    padding:1.2rem;
+    object-fit:contain !important;
+  }
   .ceramics-placeholder span { font-family:var(--serif); font-style:italic; font-size:0.85rem; color:var(--muted); }
   .sold-badge {
     position:absolute; top:14px; left:14px;
@@ -277,6 +281,10 @@
 
 
 
+
+  @media(min-width:769px){
+    .home-collection-img { padding:1.5rem; }
+  }
 </style>
 </head>
 <body>
@@ -329,7 +337,7 @@
   </div>
   <!-- LATEST COLLECTION -->
   <div>
-    <div style="padding:3rem 3rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div style="padding:2rem 3rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
       <div>
         <p class="eyebrow">Latest Collection &nbsp;·&nbsp; Maine Wild Blueberry</p>
       </div>
@@ -337,7 +345,7 @@
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
       <div style="position:relative;">
-        <img src="butter_dish_a.png" alt="Butter Dish" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;padding:1.5rem;">
+        <img src="butter_dish_a.png" alt="Butter Dish" class="home-collection-img" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;">
         <div style="padding:1rem 1.2rem;">
           <p class="ceramics-type">Maine Wild Blueberry</p>
           <p class="ceramics-name">Butter Dish</p>
@@ -345,7 +353,7 @@
         </div>
       </div>
       <div style="position:relative;">
-        <img src="bowl_1.png" alt="Pinch Bowl" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;padding:1.5rem;">
+        <img src="bowl_1.png" alt="Pinch Bowl" class="home-collection-img" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;">
         <div style="padding:1rem 1.2rem;">
           <p class="ceramics-type">Maine Wild Blueberry</p>
           <p class="ceramics-name">Pinch Bowl</p>
@@ -353,7 +361,7 @@
         </div>
       </div>
       <div style="position:relative;">
-        <img src="ring_holder.png" alt="Ring Dish" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;padding:1.5rem;">
+        <img src="ring_holder.png" alt="Ring Dish" class="home-collection-img" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;">
         <div style="padding:1rem 1.2rem;">
           <p class="ceramics-type">Maine Wild Blueberry</p>
           <p class="ceramics-name">Ring Dish</p>
