@@ -293,6 +293,9 @@
 </head>
 <body>
 
+<div id="announcement-bar" style="background:var(--ink);color:var(--white);text-align:center;padding:0.6rem 1.5rem;font-family:var(--sans);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;" onclick="show('ceramics')">
+  New — Maine Wild Blueberry collection &nbsp;→
+</div>
 <nav>
   <span class="nav-logo" onclick="show('home')">Dancing Tomato Studio</span>
   <div class="nav-links-all">
@@ -327,9 +330,6 @@
 
 <!-- HOME -->
 <section id="home" class="active">
-  <div style="background:var(--ink);color:var(--white);text-align:center;padding:0.6rem 1.5rem;font-family:var(--sans);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;" onclick="show('ceramics')">
-    New — Maine Wild Blueberry collection &nbsp;→
-  </div>
   <div class="home-hero">
     <p class="home-hero-eyebrow">Portland, Maine</p>
     <h1 class="home-hero-title">A creative studio<br><em>with a sense of place</em></h1>
@@ -607,6 +607,8 @@ function openMenu() { document.getElementById('mobileMenu').classList.add('open'
 function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
 
 function show(id) {
+  const bar = document.getElementById('announcement-bar');
+  if(bar) bar.style.display = id === 'home' ? 'block' : 'none';
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
