@@ -110,13 +110,19 @@
   .ceramics-placeholder {
     aspect-ratio:1/1; background:var(--border);
     display:flex; align-items:center; justify-content:center;
-    position:relative;
+    position:relative; overflow:hidden;
   }
   .ceramics-placeholder img {
     padding:1.8rem;
-    object-fit:contain !important;
+    object-fit:contain;
     width:100%;
     height:100%;
+    display:block;
+    position:absolute;
+    top:0; left:0;
+  }
+  .ceramics-placeholder img.mug-img {
+    padding:2.8rem;
   }
   .ceramics-placeholder span { font-family:var(--serif); font-style:italic; font-size:0.85rem; color:var(--muted); }
   .sold-badge {
@@ -422,19 +428,19 @@
       <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="ring_holder.jpg" alt="Maine Wild Blueberry Ring Dish" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="sold-badge">Sold Out</span></div>
       <div class="ceramics-meta"><p class="ceramics-type">Maine Wild Blueberry</p><p class="ceramics-name">Ring Dish</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$50</p></div>
     </div>
-  </div>
     <div class="ceramics-item">
-      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_2.jpg" style="padding:2.8rem !important;" alt="Seafoam Mug" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_2.jpg" class="mug-img" alt="Seafoam Mug" style="width:100%;height:100%;object-fit:contain;padding:2rem;display:block;"><span class="sold-badge">Sold Out</span></div>
       <div class="ceramics-meta"><p class="ceramics-type">Seafoam</p><p class="ceramics-name">Mug</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$65</p></div>
     </div>
     <div class="ceramics-item">
-      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_1.jpg" style="padding:2.8rem !important;" alt="Navy Dip Mug" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_1.jpg" class="mug-img" alt="Navy Dip Mug" style="width:100%;height:100%;object-fit:contain;padding:2rem;display:block;"><span class="sold-badge">Sold Out</span></div>
       <div class="ceramics-meta"><p class="ceramics-type">Navy Dip</p><p class="ceramics-name">Mug</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$65</p></div>
     </div>
     <div class="ceramics-item">
-      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_3.jpg" style="padding:2.8rem !important;" alt="Ribbed Teal Mug" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_3.jpg" class="mug-img" alt="Ribbed Teal Mug" style="width:100%;height:100%;object-fit:contain;padding:2rem;display:block;"><span class="sold-badge">Sold Out</span></div>
       <div class="ceramics-meta"><p class="ceramics-type">Ribbed Teal</p><p class="ceramics-name">Mug</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$65</p></div>
     </div>
+  </div>
 </section>
 
 <!-- PORTLAND PRINTS -->
