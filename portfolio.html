@@ -179,7 +179,7 @@ html, body { background:var(--bg); min-height:100vh; font-family:var(--sans); fo
 <div id="pw-screen">
   <p class="pw-logo">Dancing Tomato Studio</p>
   <div class="pw-center">
-    <p class="pw-title">Client portfolio</p>
+    <p class="pw-title">Selected work</p>
     <p class="pw-sub">Private access only</p>
   </div>
   <div class="pw-form">
@@ -207,8 +207,9 @@ html, body { background:var(--bg); min-height:100vh; font-family:var(--sans); fo
   </nav>
 
   <div class="p-header">
-    <p class="p-header-eyebrow">Selected work · 2024–2026</p>
+    <p class="p-header-eyebrow">Selected work</p>
     <h1 class="p-header-title">Portfolio<br><em>by Haley Crocker</em></h1>
+    <p style="font-family:var(--sans);font-size:0.95rem;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.8;max-width:560px;margin-top:1.5rem;">Hi, I'm Haley! I'm a Portland, Maine-based graphic designer and illustrator with over 15 years of experience. This is a selection of work across brand identity, print, illustration, and event stationery.</p>
   </div>
 
   <!-- GRAPHIC DESIGN -->
@@ -297,29 +298,6 @@ html, body { background:var(--bg); min-height:100vh; font-family:var(--sans); fo
     </div>
   </div>
 
-  <!-- CERAMICS -->
-  <div class="p-section" data-section>
-    <p class="p-section-label">Ceramics</p>
-    <div class="grid-2">
-      <div class="thumb ratio-landscape" data-bg="#1E3848">
-        <img class="thumb-img ratio-landscape" src="bowl_1.jpg" alt="Maine Wild Blueberry Pinch Bowl" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-        <div class="thumb-placeholder c2 ratio-landscape" style="display:none;"></div>
-        <div class="thumb-label">
-          <span>Maine Wild Blueberry</span>
-          <p>Pinch Bowl</p>
-        </div>
-      </div>
-      <div class="thumb ratio-landscape" data-bg="#243040">
-        <img class="thumb-img ratio-landscape" src="butter_dish_b.jpg" alt="Maine Wild Blueberry Butter Dish" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-        <div class="thumb-placeholder c4 ratio-landscape" style="display:none;"></div>
-        <div class="thumb-label">
-          <span>Maine Wild Blueberry</span>
-          <p>Butter Dish</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="p-footer">
     <p>© 2026 Dancing Tomato Studio · Portland, Maine</p>
     <em>For client use only — please do not share</em>
@@ -359,7 +337,7 @@ function unlock() {
     setTimeout(() => {
       pwScreen.style.display = 'none';
       introScreen.classList.add('show');
-      typeText('Welcome. Here\'s the work.', introTextEl, () => {
+      typeText('Welcome! Take a look around...', introTextEl, () => {
         introScreen.classList.replace('show', 'hide');
         setTimeout(() => {
           introScreen.style.display = 'none';
