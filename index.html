@@ -64,7 +64,7 @@
     font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase;
     color:var(--muted); margin-bottom:1rem; font-family:var(--sans); font-weight:300;
   }
-  .section-header { padding:4rem 3rem 2.5rem; border-bottom:0.5px solid var(--border); }
+  .section-header { padding:4rem 3rem 2.5rem; border-bottom:0.5px solid var(--border); max-width:1200px; margin:0 auto; width:100%; }
   .section-title { font-family:var(--serif); font-size:2.2rem; font-weight:400; color:var(--ink); }
 
     /* ── HOME ── */
@@ -104,6 +104,8 @@
   .ceramics-grid {
     display:grid; grid-template-columns:1fr 1fr 1fr;
     border-top:0.5px solid var(--border);
+    max-width:1200px;
+    margin:0 auto;
   }
   .ceramics-item { border-right:0.5px solid var(--border); border-bottom:0.5px solid var(--border); }
   .ceramics-item:nth-child(3n) { border-right:none; }
@@ -413,8 +415,8 @@
     <div class="ceramics-item">
       <div class="ceramics-placeholder" style="background:none;padding:0;position:relative;">
         <div class="carousel" id="butter-carousel">
-          <img src="butter_dish_b.jpg" alt="Maine Wild Blueberry Butter Dish Open" class="carousel-img active" style="width:100%;height:100%;object-fit:cover;display:block;">
-          <img src="butter_dish_a.jpg" alt="Maine Wild Blueberry Butter Dish" class="carousel-img" style="width:100%;height:100%;object-fit:cover;display:none;">
+          <img src="butter_dish_b.jpg" alt="Maine Wild Blueberry Butter Dish Open" class="carousel-img active" style="width:100%;height:100%;object-fit:contain;padding:1.8rem;display:block;">
+          <img src="butter_dish_a.jpg" alt="Maine Wild Blueberry Butter Dish" class="carousel-img" style="width:100%;height:100%;object-fit:contain;padding:1.8rem;display:none;">
         </div>
         <span class="sold-badge">Sold Out</span>
         <div style="position:absolute;bottom:10px;right:10px;display:flex;gap:5px;">
