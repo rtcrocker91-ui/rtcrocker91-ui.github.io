@@ -160,13 +160,47 @@ html, body { background:var(--bg); min-height:100vh; font-family:var(--sans); fo
 
 /* Mobile */
 @media(max-width:680px) {
-  .grid-hero { grid-template-columns:1fr; }
-  .grid-3 { grid-template-columns:1fr 1fr; }
-  .grid-2 { grid-template-columns:1fr; }
-  .p-header { padding:2.5rem 1.5rem 2rem; }
-  .p-section { padding:2rem 1.5rem; }
+  /* Password screen */
+  .pw-title { font-size:1.6rem; }
+  .pw-form { max-width:100%; }
+  .pw-input { font-size:1rem; padding:1rem 0; }
+  .pw-btn { padding:1rem; font-size:0.78rem; }
+
+  /* Intro */
+  .intro-text { font-size:1.3rem; padding:0 1.5rem; text-align:center; }
+
+  /* Nav */
   .p-nav { padding:1rem 1.5rem; }
-  .p-footer { padding:1rem 1.5rem; flex-direction:column; gap:0.5rem; align-items:flex-start; }
+
+  /* Header */
+  .p-header { padding:2.5rem 1.5rem 2rem; }
+  .p-header-title { font-size:2.2rem; }
+
+  /* Sections */
+  .p-section { padding:2rem 1.5rem; }
+  .p-section-label { margin-bottom:1.2rem; }
+
+  /* Grids — all single column on mobile */
+  .grid-hero { grid-template-columns:1fr; }
+  .grid-3 { grid-template-columns:1fr; }
+  .grid-2 { grid-template-columns:1fr; }
+  .grid-side { gap:4px; }
+
+  /* Portrait thumbs too tall on mobile — convert to landscape */
+  .ratio-portrait { aspect-ratio:4/3; }
+
+  /* Always show thumb labels on mobile (no hover) */
+  .thumb-label { opacity:1; }
+
+  /* Footer */
+  .p-footer { padding:1.5rem; flex-direction:column; gap:0.4rem; align-items:flex-start; }
+}
+
+/* Mid-size screens */
+@media(min-width:681px) and (max-width:900px) {
+  .grid-3 { grid-template-columns:1fr 1fr; }
+  .p-header { padding:3.5rem 2rem 2.5rem; }
+  .p-section { padding:3rem 2rem; }
 }
 
 @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
@@ -184,7 +218,10 @@ html, body { background:var(--bg); min-height:100vh; font-family:var(--sans); fo
   </div>
   <div class="pw-form">
     <p class="pw-error" id="pw-error"></p>
-    <input class="pw-input" type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <div style="position:relative;">
+      <input class="pw-input" type="password" id="pw-input" placeholder="Password" autocomplete="off">
+      <button onclick="togglePw()" style="position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.3);font-size:1.1rem;line-height:1;padding:0.3rem;transition:color 0.2s;" id="pw-toggle" title="Show password">👁</button>
+    </div>
     <button class="pw-btn" id="pw-btn">Enter</button>
     <p class="pw-hint">Need access? <a href="index.html#contact">Get in touch →</a></p>
   </div>
@@ -300,7 +337,7 @@ html, body { background:var(--bg); min-height:100vh; font-family:var(--sans); fo
 
   <div class="p-footer">
     <p>© 2026 Dancing Tomato Studio · Portland, Maine</p>
-    <em>For client use only — please do not share</em>
+    <em>Dancing Tomato Studio · dancingtomatostudio.com</em>
   </div>
 
 </div>
@@ -352,6 +389,18 @@ function unlock() {
     setTimeout(() => pwInput.classList.remove('wrong'), 400);
     pwInput.value = '';
     pwInput.focus();
+  }
+}
+
+function togglePw() {
+  const input = document.getElementById('pw-input');
+  const btn = document.getElementById('pw-toggle');
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    btn.textContent = '👁';
   }
 }
 
