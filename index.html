@@ -3,132 +3,653 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Intellectual Property Policy — Dancing Tomato Studio</title>
+<title>Dancing Tomato Studio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍅</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   :root {
-    --cream:#FFFFFF;
+    --white:#FFFFFF;
     --ink:#2A3540;
     --muted:#8A9AA0;
     --accent:#4A6070;
     --gold:#D0D8DC;
     --green:#2A3540;
-    --border-c:#D0D8DC;
+    --border:#D0D8DC;
     --serif:'EB Garamond',Georgia,serif;
     --sans:'DM Sans',system-ui,sans-serif;
   }
+  body { background:var(--white); color:var(--ink); font-family:var(--sans); font-weight:300; }
 
-  body { background:var(--cream); color:var(--ink); font-family:var(--sans); font-weight:300; }
-
+  /* NAV */
   nav {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:1.5rem 3rem; border-bottom:0.5px solid var(--border-c);
-    position:sticky; top:0; background:var(--cream); z-index:10;
+    position:sticky; top:0; background:var(--white); z-index:100;
+    border-bottom:0.5px solid var(--border);
+    padding:1.2rem 2.5rem;
+    display:flex; align-items:center;
   }
-  .nav-logo {
-    font-family:var(--serif); font-size:1.1rem; letter-spacing:0.02em;
-    color:var(--ink); text-decoration:none;
-  }
-  .nav-back {
-    font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--muted); text-decoration:none; transition:color 0.2s;
-  }
-  .nav-back:hover { color:var(--ink); }
+  .nav-logo { font-family:var(--serif); font-size:1rem; color:var(--ink); letter-spacing:0.04em; cursor:pointer; white-space:nowrap; font-weight:400; }
+  .nav-links-all { display:flex; gap:1.5rem; align-items:center; margin-left:1.5rem; }
+  .nav-links-all a { font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; cursor:pointer; white-space:nowrap; font-family:var(--sans); font-weight:300; }
+  .nav-links-all a:hover, .nav-links-all a.active { color:var(--ink); }
 
-  .policy-wrap {
-    max-width:720px; margin:0 auto;
-    padding:5rem 3rem 6rem;
-  }
+  section { display:none; }
+  section.active { display:block; }
 
-  .policy-eyebrow {
+  .btn-primary {
+    font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    background:var(--green); color:var(--white); border:none;
+    padding:0.9rem 2rem; cursor:pointer; font-family:var(--sans);
+    font-weight:400; transition:background 0.2s; display:inline-block;
+  }
+  .btn-primary:hover { background:var(--ink); }
+  .btn-green {
+    font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    background:var(--green); color:var(--white); border:none;
+    padding:0.9rem 2rem; cursor:pointer; font-family:var(--sans);
+    font-weight:400; transition:background 0.2s; display:inline-block;
+  }
+  .btn-green:hover { background:var(--ink); }
+  .btn-ghost {
+    font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase;
+    background:none; color:var(--green); border:none;
+    border-bottom:1px solid var(--green); padding-bottom:2px;
+    cursor:pointer; font-family:var(--sans); font-weight:300;
+    transition:color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color:var(--ink); border-color:var(--ink); }
+
+  .eyebrow {
     font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase;
-    color:var(--muted); margin-bottom:1.2rem;
+    color:var(--muted); margin-bottom:1rem; font-family:var(--sans); font-weight:300;
   }
+  .section-header { padding:4rem 3rem 2.5rem; border-bottom:0.5px solid var(--border); max-width:1200px; margin:0 auto; width:100%; }
+  .section-title { font-family:var(--serif); font-size:2.2rem; font-weight:400; color:var(--ink); }
 
-  .policy-title {
-    font-family:var(--serif); font-size:clamp(2rem,4vw,3rem);
-    font-weight:400; line-height:1.1; margin-bottom:0.8rem; color:var(--ink);
+    /* ── HOME ── */
+
+  .home-hero {
+    padding:6rem 3rem 4rem;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
   }
-
-  .policy-date {
-    font-size:0.78rem; color:var(--muted); margin-bottom:3.5rem;
-    padding-bottom:2.5rem; border-bottom:0.5px solid var(--border-c);
+  .home-hero-eyebrow { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:2rem; }
+  .home-hero-title {
+    font-family:var(--serif); font-size:clamp(3rem,5vw,4rem);
+    font-weight:400; line-height:1.0; color:var(--ink); margin-bottom:2rem;
+    max-width:1100px;
   }
-
-  .policy-section { margin-bottom:3rem; }
-
-  .policy-section h2 {
-    font-family:var(--serif); font-size:1.3rem; font-weight:400;
-    color:var(--ink); margin-bottom:1rem;
+  .home-hero-title em { font-style:italic; color:var(--accent); }
+  .home-hero-sub {
+    font-size:1rem; line-height:1.8; color:var(--ink);
+    max-width:560px; margin-bottom:3rem;
   }
+  .home-hero-actions { display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; justify-content:center; }
 
-  .policy-section p {
-    font-size:0.92rem; line-height:1.85; color:var(--ink);
-    margin-bottom:1rem; opacity:0.85;
+  .home-arms {
+    display:flex; flex-direction:column;
   }
-
-  .policy-section ul {
-    margin:0.5rem 0 1rem 0; padding-left:1.2rem;
+  .home-arm {
+    padding:3rem;
+    display:flex; flex-direction:column; gap:1rem;
+    border-top:0.5px solid var(--border);
   }
+  .home-arm:last-child { border-right:none; }
+  .home-arm-eyebrow { font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink); }
+  .home-arm-body { font-size:0.88rem; line-height:1.75; color:var(--muted); flex:1; }
+  .home-arm-link { font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink); border-bottom:0.5px solid var(--ink); padding-bottom:2px; cursor:pointer; transition:color 0.2s; width:fit-content; }
+  .home-arm-link:hover { color:var(--accent); border-color:var(--accent); }
 
-  .policy-section ul li {
-    font-size:0.92rem; line-height:1.85; color:var(--ink);
-    opacity:0.85; margin-bottom:0.4rem;
+  /* ── CERAMICS ── */
+  .ceramics-grid {
+    display:grid; grid-template-columns:1fr 1fr 1fr;
+    border-top:0.5px solid var(--border);
+    max-width:1200px;
+    margin:0 auto;
   }
-
-  .policy-divider {
-    border:none; border-top:0.5px solid var(--border-c);
-    margin:2.5rem 0;
+  .ceramics-item { border-right:0.5px solid var(--border); border-bottom:0.5px solid var(--border); }
+  .ceramics-item:nth-child(3n) { border-right:none; }
+  .ceramics-placeholder {
+    aspect-ratio:1/1; background:var(--border);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
   }
-
-  .policy-highlight {
-    border-left:2px solid var(--accent);
-    padding:1.2rem 1.5rem; margin:2rem 0;
-    background:#FFF8F5;
+  .ceramics-placeholder img {
+    padding:1.8rem;
+    object-fit:contain;
+    width:100%;
+    height:100%;
+    display:block;
+    position:absolute;
+    top:0; left:0;
   }
-
-  .policy-highlight p {
-    font-family:var(--serif); font-size:1.05rem;
-    line-height:1.7; color:var(--ink); opacity:1; margin:0;
+  .ceramics-placeholder img.mug-img {
+    padding:2.8rem;
   }
+  .ceramics-placeholder span { font-family:var(--serif); font-style:italic; font-size:0.85rem; color:var(--muted); }
+  .sold-badge {
+    position:absolute; top:14px; left:14px;
+    font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase;
+    background:rgba(200,210,215,0.6); color:var(--muted); padding:4px 8px;
+    font-family:"DM Sans",system-ui,sans-serif !important; font-weight:300 !important; font-style:normal !important; font-size:0.78rem !important;
+  }
+  .ceramics-meta { padding:1.2rem 1.5rem; }
+  .ceramics-type { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.3rem; }
+  .ceramics-name { font-family:var(--serif); font-size:1.1rem; color:var(--ink); }
 
-  footer {
-    border-top:0.5px solid var(--border-c); padding:1.5rem 3rem;
+  /* ── PORTLAND PRINTS ── */
+  .prints-grid {
+    display:grid; grid-template-columns:1fr 1fr 1fr;
+    border-top:0.5px solid var(--border);
+  }
+  .prints-item { border-right:0.5px solid var(--border); border-bottom:0.5px solid var(--border); }
+  .prints-item:nth-child(3n) { border-right:none; }
+  .prints-placeholder {
+    aspect-ratio:3/4; background:var(--border);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .prints-placeholder span { font-family:var(--serif); font-style:italic; font-size:0.85rem; color:var(--muted); }
+  .prints-meta { padding:1.2rem 1.5rem; border-top:0.5px solid var(--border); }
+  .prints-neighborhood { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.3rem; }
+  .prints-name { font-family:var(--serif); font-size:1.1rem; color:var(--ink); margin-bottom:0.2rem; }
+  .prints-price { font-size:0.85rem; color:var(--muted); }
+
+  .wholesale-wrap { display:grid; grid-template-columns:1fr 1fr; border-top:0.5px solid var(--border); }
+  .wholesale-left { padding:4rem 3rem; border-right:0.5px solid var(--border); }
+  .wholesale-left h3 { font-family:var(--serif); font-size:2.2rem; font-weight:400; margin-bottom:1rem; }
+  .wholesale-left h3 em { font-style:italic; color:var(--accent); }
+  .wholesale-left p { font-size:0.9rem; line-height:1.8; color:var(--muted); margin-bottom:2rem; max-width:360px; }
+  .wholesale-right { padding:4rem 3rem; }
+  .wholesale-right h3 { font-family:var(--serif); font-size:2.2rem; font-weight:400; margin-bottom:1rem; }
+  .wholesale-right h3 em { font-style:italic; color:var(--accent); }
+  .wholesale-right p { font-size:0.9rem; line-height:1.8; color:var(--muted); margin-bottom:2rem; max-width:360px; }
+
+  /* ── CUSTOM WORK ── */
+  .custom-intro { padding:3rem; border-bottom:0.5px solid var(--border); max-width:680px; }
+  .custom-intro p { font-family:var(--sans); font-size:1rem; line-height:1.8; color:var(--ink); margin-bottom:1rem; font-weight:300; }
+  .custom-services { display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:0.5px solid var(--border); }
+  .custom-service { padding:2.5rem 3rem; border-right:0.5px solid var(--border); }
+  .custom-service:last-child { border-right:none; }
+  .custom-service-title { font-family:var(--serif); font-size:1.2rem; font-weight:400; margin-bottom:0.8rem; }
+  .custom-service-body { font-size:0.88rem; line-height:1.75; color:var(--muted); }
+  .custom-grid { display:grid; grid-template-columns:1fr 1fr; border-bottom:0.5px solid var(--border); }
+  .custom-item { border-right:0.5px solid var(--border); border-bottom:0.5px solid var(--border); }
+  .custom-item:nth-child(2n) { border-right:none; }
+  .custom-placeholder { aspect-ratio:4/3; background:var(--border); display:flex; align-items:center; justify-content:center; }
+  .custom-placeholder span { font-family:var(--serif); font-style:italic; font-size:0.85rem; color:var(--muted); }
+  .custom-meta { padding:1.2rem 1.5rem; border-top:0.5px solid var(--border); }
+  .custom-cat { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:0.3rem; }
+  .custom-name { font-family:var(--serif); font-size:1.1rem; color:var(--ink); }
+
+  /* ── ABOUT ── */
+  .about-wrap { display:grid; grid-template-columns:1fr 1fr; min-height:80vh; border-top:0.5px solid var(--border); }
+  .about-image { background:var(--border); display:flex; align-items:center; justify-content:center; border-right:0.5px solid var(--border); }
+  .about-image span { font-family:var(--serif); font-style:italic; font-size:0.9rem; color:var(--muted); }
+  .about-text { padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; }
+  .about-text p { font-family:var(--sans); font-size:1rem; font-weight:300; line-height:1.8; color:var(--ink); margin-bottom:1.5rem; }
+  .about-text .small { font-size:0.85rem; font-family:var(--sans); font-weight:300; color:var(--muted); line-height:1.8; margin-top:0; }
+
+  /* ── CONTACT ── */
+  .contact-wrap { display:grid; grid-template-columns:1fr 1fr; min-height:85vh; border-top:0.5px solid var(--border); }
+  .contact-left { padding:5rem 4rem; border-right:0.5px solid var(--border); display:flex; flex-direction:column; justify-content:center; }
+  .contact-left h2 { font-family:var(--serif); font-size:2.5rem; font-weight:400; line-height:1.15; margin-bottom:1.2rem; color:var(--ink); }
+  .contact-left h2 em { font-style:italic; color:var(--accent); }
+  .contact-left p { font-size:0.9rem; color:var(--muted); line-height:1.8; max-width:300px; }
+  .contact-right { padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center; }
+  .form-field { margin-bottom:1.8rem; }
+  .form-label { display:block; font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:0.6rem; }
+  .form-input, .form-textarea, .form-select {
+    width:100%; background:none; border:none; border-bottom:0.5px solid var(--border);
+    padding:0.6rem 0; font-family:var(--sans); font-size:0.9rem;
+    font-weight:300; color:var(--ink); outline:none; transition:border-color 0.2s; appearance:none;
+  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { border-color:var(--ink); }
+  .form-textarea { resize:none; height:80px; }
+
+  /* FOOTER */
+  footer { border-top:0.5px solid var(--border); padding:1.5rem 3rem; display:flex; align-items:center; justify-content:space-between; }
+  footer p, footer a { font-size:0.75rem; color:var(--muted); text-decoration:none; }
+  footer a:hover { color:var(--ink); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display:none !important; flex-direction:column; gap:5px; cursor:pointer;
+    padding:4px; background:none; border:none;
+  }
+  .hamburger span { display:block; width:22px; height:1.5px; background:var(--ink); transition:all 0.3s; }
+  .mobile-menu {
+    display:none; position:fixed; inset:0; background:var(--white);
+    z-index:200; flex-direction:column; padding:2rem 2rem;
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu-top {
     display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:3rem; padding-bottom:1.5rem; border-bottom:0.5px solid var(--border);
   }
-  footer p { font-size:0.75rem; color:var(--muted); }
+  .mobile-menu-logo { font-family:var(--serif); font-size:1rem; color:var(--ink); }
+  .mobile-menu-close { font-size:1.4rem; cursor:pointer; background:none; border:none; color:var(--ink); line-height:1; }
+  .mobile-menu-links { display:flex; flex-direction:column; gap:0; flex:1; }
+  .mobile-menu-links a {
+    font-family:var(--serif); font-size:2rem; font-weight:400;
+    color:var(--ink); text-decoration:none; padding:1rem 0;
+    border-bottom:0.5px solid var(--border); cursor:pointer; transition:color 0.2s;
+  }
+  .mobile-menu-links a:hover { color:var(--accent); }
+  .mobile-menu-links a em { font-style:italic; color:var(--green); }
+  .mobile-menu-cta { margin-top:2rem; }
 
-  @media (max-width: 768px) {
-    nav { padding:1.2rem 1.5rem; }
-    .nav-logo { font-size:0.95rem; }
-    .policy-wrap { padding:3rem 1.5rem 4rem; }
-    footer { padding:1.2rem 1.5rem; }
+  /* MOBILE */
+  @media(max-width:768px){
+    nav { padding:1rem 1.5rem; justify-content:space-between; }
+    .nav-logo { font-size:0.9rem; }
+    .nav-links-all { display:none !important; }
+    .nav-get-in-touch { display:none !important; }
+    .hamburger { display:flex !important; flex-direction:column; }
+
+    .home-hero { padding:3.5rem 1.5rem 3rem; }
+    .home-hero-title { font-size:2.2rem; line-height:1.1; }
+    .home-hero-sub { font-size:0.9rem; margin-bottom:2rem; }
+    .home-hero-actions { flex-direction:column; align-items:stretch; gap:0.8rem; }
+    .home-hero-actions button { text-align:center; }
+    .home-arm { padding:2rem 1.5rem; }
+
+    .ceramics-grid { grid-template-columns:1fr 1fr; }
+    .ceramics-item:nth-child(3n) { border-right:0.5px solid var(--border); }
+    .ceramics-item:nth-child(2n) { border-right:none; }
+
+    .prints-grid { grid-template-columns:1fr 1fr; }
+    .prints-item:nth-child(3n) { border-right:0.5px solid var(--border); }
+    .prints-item:nth-child(2n) { border-right:none; }
+
+    .wholesale-wrap { grid-template-columns:1fr; }
+    .wholesale-left { border-right:none; border-bottom:0.5px solid var(--border); padding:2.5rem 1.5rem; }
+    .wholesale-right { padding:2.5rem 1.5rem; }
+
+    .custom-intro { padding:2rem 1.5rem; }
+    .custom-services { grid-template-columns:1fr; }
+    .custom-service { border-right:none; border-bottom:0.5px solid var(--border); padding:2rem 1.5rem; }
+    .custom-grid { grid-template-columns:1fr 1fr; }
+    .custom-item:nth-child(2n) { border-right:none; }
+
+    .about-wrap { grid-template-columns:1fr; }
+    .about-image { min-height:260px; border-right:none; border-bottom:0.5px solid var(--border); }
+    .about-text { padding:2.5rem 1.5rem; }
+
+    .contact-wrap { grid-template-columns:1fr; min-height:auto; }
+    .contact-left { padding:2.5rem 1.5rem; border-right:none; border-bottom:0.5px solid var(--border); }
+    .contact-right { padding:2.5rem 1.5rem; }
+
+    .section-header { padding:2rem 1.5rem 1.5rem; }
+    .section-header h2 { font-size:1.8rem; }
+
+    footer { padding:1.2rem 1.5rem; flex-direction:column; gap:0.5rem; align-items:flex-start; }
   }
+
+
+
+
+  @media(min-width:769px){
+    .home-collection-img { padding:1.5rem; }
+  }
+
+  /* ── POLICY ── */
+  .policy-eyebrow { font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:1.2rem; }
+  .policy-title { font-family:var(--serif); font-size:clamp(2rem,4vw,2.8rem); font-weight:400; line-height:1.1; margin-bottom:0.8rem; color:var(--ink); }
+  .policy-date { font-size:0.78rem; color:var(--muted); margin-bottom:3.5rem; padding-bottom:2.5rem; border-bottom:0.5px solid var(--border); }
+  .policy-highlight { border-left:2px solid var(--accent); padding:1.2rem 1.5rem; margin:0 0 3rem; background:#F0F4F6; }
+  .policy-highlight p { font-family:var(--serif); font-size:1.05rem; line-height:1.75; color:var(--ink); }
+  .policy-section { margin-bottom:2.5rem; }
+  .policy-section h2 { font-family:var(--serif); font-size:1.2rem; font-weight:400; color:var(--ink); margin-bottom:0.8rem; }
+  .policy-section p { font-size:0.9rem; line-height:1.85; color:var(--ink); margin-bottom:0.8rem; opacity:0.85; }
+  .policy-section ul { margin:0.5rem 0 1rem 0; padding-left:1.2rem; }
+  .policy-section ul li { font-size:0.9rem; line-height:1.85; color:var(--ink); opacity:0.85; margin-bottom:0.3rem; }
+  .policy-divider { border:none; border-top:0.5px solid var(--border); margin:2.5rem 0; }
 </style>
 </head>
 <body>
 
+<div id="announcement-bar" style="background:var(--ink);color:var(--white);text-align:center;padding:0.6rem 1.5rem;font-family:var(--sans);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;" onclick="show('ceramics')">
+  New — Maine Wild Blueberry collection &nbsp;→
+</div>
 <nav>
-  <a href="/" class="nav-logo">Dancing Tomato Studio</a>
-  <a href="/" class="nav-back">← Back</a>
+  <span class="nav-logo" onclick="show('home')">Dancing Tomato Studio</span>
+  <div class="nav-links-all">
+    <a onclick="show('home')" id="nav-home" class="active">Home</a>
+    <a onclick="show('prints')" id="nav-prints">Portland Prints</a>
+    <a onclick="show('ceramics')" id="nav-ceramics">Ceramics</a>
+    <a onclick="show('custom')" id="nav-custom">Custom Work</a>
+    <a onclick="show('about')" id="nav-about">About</a>
+  </div>
+  <button class="btn-primary nav-get-in-touch" onclick="show('contact')" style="font-size:0.7rem;padding:0.6rem 1.2rem;margin-left:auto;white-space:nowrap;">Get in touch</button>
+  <button class="hamburger" onclick="openMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="policy-wrap">
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="mobile-menu-logo">Dancing Tomato Studio</span>
+    <button class="mobile-menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a onclick="show('home');closeMenu()">Home</a>
+    <a onclick="show('prints');closeMenu()">Portland <em>Prints</em></a>
+    <a onclick="show('ceramics');closeMenu()">Ceramics</a>
+    <a onclick="show('custom');closeMenu()">Custom Work</a>
+    <a onclick="show('about');closeMenu()">About</a>
+  </div>
+  <div class="mobile-menu-cta">
+    <button class="btn-primary" style="width:100%;text-align:center;padding:1rem;" onclick="show('contact');closeMenu()">Get in touch</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="home-hero">
+    <p class="home-hero-eyebrow">Portland, Maine</p>
+    <h1 class="home-hero-title">A creative studio<br><em>with a sense of place</em></h1>
+    <p class="home-hero-sub">Founded in Portland, Maine, Dancing Tomato Studio works across print, illustration, graphic design, and object-making. A studio built for clients and collaborators who care about how things are made.</p>
+    <div class="home-hero-actions">
+      <button class="btn-primary" onclick="show('prints')">Shop prints</button>
+      <button class="btn-green" onclick="show('ceramics')">Shop ceramics</button>
+      <button class="btn-ghost" onclick="show('custom')">View custom work</button>
+    </div>
+  </div>
+  <!-- LATEST COLLECTION -->
+  <div style="padding-bottom:3rem;">
+    <div style="padding:1.5rem 3rem 0.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <p class="eyebrow">Latest Collection &nbsp;·&nbsp; Maine Wild Blueberry</p>
+      </div>
+      <span class="home-arm-link" onclick="show('ceramics')" style="margin-bottom:0.3rem;">View all ceramics →</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+      <div style="position:relative;">
+        <img src="butter_dish_a.jpg" alt="Butter Dish" class="home-collection-img" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;">
+        <div style="padding:0.6rem 1.2rem;">
+          <p class="ceramics-type">Maine Wild Blueberry</p>
+          <p class="ceramics-name">Butter Dish</p>
+          <p class="ceramics-type" style="margin-top:0.2rem;color:var(--ink);">$95</p>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <img src="bowl_1.jpg" alt="Pinch Bowl" class="home-collection-img" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;">
+        <div style="padding:0.6rem 1.2rem;">
+          <p class="ceramics-type">Maine Wild Blueberry</p>
+          <p class="ceramics-name">Pinch Bowl</p>
+          <p class="ceramics-type" style="margin-top:0.2rem;color:var(--ink);">$75</p>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <img src="ring_holder.jpg" alt="Ring Dish" class="home-collection-img" loading="eager" style="width:100%;aspect-ratio:1/1;object-fit:contain;display:block;">
+        <div style="padding:0.6rem 1.2rem;">
+          <p class="ceramics-type">Maine Wild Blueberry</p>
+          <p class="ceramics-name">Ring Dish</p>
+          <p class="ceramics-type" style="margin-top:0.2rem;color:var(--ink);">$50</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL SIGNUP STRIP -->
+  <div style="background:#EEF2F4;padding:3.5rem 3rem;text-align:center;">
+    <p style="font-family:var(--serif);font-size:1.4rem;color:var(--ink);margin-bottom:0.3rem;">Keep in touch</p>
+    <p style="font-family:var(--serif);font-style:italic;font-size:1.4rem;color:var(--accent);margin-bottom:1.5rem;">New work, updates, and the occasional note</p>
+    <div style="display:inline-flex;gap:0;background:#fff;padding:0.6rem 1rem;max-width:380px;width:100%;">
+      <input type="email" placeholder="your@email.com" style="border:none;flex:1;font-family:var(--sans);font-size:0.9rem;font-weight:300;color:var(--ink);outline:none;">
+      <button class="btn-primary" style="font-size:0.72rem;padding:0.5rem 1rem;">→</button>
+    </div>
+  </div>
+
+  <div class="home-arms">
+    <div class="home-arm">
+      <p class="home-arm-eyebrow">Portland Prints</p>
+      <p class="home-arm-body">Original illustrations of Portland's restaurants, shops, and landmarks — drawn from life, printed as 6″ × 9″ fine art prints, signed.</p>
+      <span class="home-arm-link" onclick="show('prints')">Shop prints →</span>
+    </div>
+    <div class="home-arm">
+      <p class="home-arm-eyebrow">Ceramics</p>
+      <p class="home-arm-body">Functional objects made to live in your home. Mugs, plates, bowls, and pots — each one finished by hand in Portland, Maine.</p>
+      <span class="home-arm-link" onclick="show('ceramics')">Shop ceramics →</span>
+    </div>
+    <div class="home-arm">
+      <p class="home-arm-eyebrow">Custom Work</p>
+      <p class="home-arm-body">Illustration, graphic design, and print work — for brands, events, and individuals. Each project is scoped and priced individually.</p>
+      <span class="home-arm-link" onclick="show('custom')">See custom work →</span>
+    </div>
+  </div>
+</section>
+
+<!-- CERAMICS -->
+<section id="ceramics">
+  <div class="section-header">
+    <p class="eyebrow">Handmade in Portland, Maine</p>
+    <h2 class="section-title">Ceramics</h2>
+  </div>
+  <div class="ceramics-grid">
+    <div class="ceramics-item">
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="bowl_1.jpg" alt="Maine Wild Blueberry Pinch Bowl" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-meta"><p class="ceramics-type">Maine Wild Blueberry</p><p class="ceramics-name">Pinch Bowl</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$75</p></div>
+    </div>
+    <div class="ceramics-item">
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="bowl_2.jpg" alt="Maine Wild Blueberry Small Pinch Bowl" style="width:100%;height:100%;object-fit:cover;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-meta"><p class="ceramics-type">Maine Wild Blueberry</p><p class="ceramics-name">Petite Pinch Bowl</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$60</p></div>
+    </div>
+    <div class="ceramics-item">
+      <div class="ceramics-placeholder" style="background:none;padding:0;position:relative;">
+        <div class="carousel" id="butter-carousel">
+          <img src="butter_dish_b.jpg" alt="Maine Wild Blueberry Butter Dish Open" class="carousel-img active" style="width:100%;height:100%;object-fit:contain;padding:1.8rem;display:block;">
+          <img src="butter_dish_a.jpg" alt="Maine Wild Blueberry Butter Dish" class="carousel-img" style="width:100%;height:100%;object-fit:contain;padding:1.8rem;display:none;">
+        </div>
+        <span class="sold-badge">Sold Out</span>
+        <div style="position:absolute;bottom:10px;right:10px;display:flex;gap:5px;">
+          <button onclick="prevSlide('butter-carousel')" style="background:rgba(255,255,255,0.8);border:none;width:24px;height:24px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">‹</button>
+          <button onclick="nextSlide('butter-carousel')" style="background:rgba(255,255,255,0.8);border:none;width:24px;height:24px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">›</button>
+        </div>
+      </div>
+      <div class="ceramics-meta"><p class="ceramics-type">Maine Wild Blueberry</p><p class="ceramics-name">Butter Dish</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$95</p></div>
+    </div>
+    <div class="ceramics-item">
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="ring_holder.jpg" alt="Maine Wild Blueberry Ring Dish" style="width:100%;height:100%;object-fit:contain;padding:2.5rem;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-meta"><p class="ceramics-type">Maine Wild Blueberry</p><p class="ceramics-name">Ring Dish</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$50</p></div>
+    </div>
+    <div class="ceramics-item">
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_2.jpg" class="mug-img" alt="Seafoam Mug" style="width:100%;height:100%;object-fit:contain;padding:2rem;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-meta"><p class="ceramics-type">Seafoam</p><p class="ceramics-name">Mug</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$65</p></div>
+    </div>
+    <div class="ceramics-item">
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_1.jpg" class="mug-img" alt="Navy Dip Mug" style="width:100%;height:100%;object-fit:contain;padding:2rem;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-meta"><p class="ceramics-type">Navy Dip</p><p class="ceramics-name">Mug</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$65</p></div>
+    </div>
+    <div class="ceramics-item">
+      <div class="ceramics-placeholder" style="background:none;padding:0;"><img src="mug_3.jpg" class="mug-img" alt="Ribbed Teal Mug" style="width:100%;height:100%;object-fit:contain;padding:2rem;display:block;"><span class="sold-badge">Sold Out</span></div>
+      <div class="ceramics-meta"><p class="ceramics-type">Ribbed Teal</p><p class="ceramics-name">Mug</p><p class="ceramics-type" style="margin-top:0.3rem;color:var(--ink);">$65</p></div>
+    </div>
+  </div>
+
+  <div class="wholesale-wrap">
+    <div class="wholesale-left">
+      <p class="eyebrow">For retailers</p>
+      <h3><em>Stock</em> our ceramics</h3>
+      <p>Carry Dancing Tomato ceramics in your shop. A natural fit for gift shops, home goods stores, and any retailer looking for something locally made and one of a kind. Wholesale pricing available on minimum order.</p>
+      <button class="btn-primary" onclick="show('contact')">Get in touch</button>
+    </div>
+    <div class="wholesale-right">
+      <p class="eyebrow">For restaurants, shops & individuals</p>
+      <h3><em>Commission</em> ceramic work</h3>
+      <p>For restaurants, shops, and individuals looking for something specific. Custom orders are available on a limited basis.</p>
+      <button class="btn-green" onclick="show('contact')">Get in touch</button>
+    </div>
+  </div>
+</section>
+
+<!-- PORTLAND PRINTS -->
+<section id="prints">
+  <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <p class="eyebrow">Hand-drawn in Portland, Maine</p>
+      <h2 class="section-title">Portland Prints</h2>
+    </div>
+    <p style="font-size:0.82rem;color:var(--muted);">6″ × 9″ &nbsp;·&nbsp; $50 each &nbsp;·&nbsp; Signed</p>
+  </div>
+  <div class="prints-grid">
+    <div class="prints-item">
+      <div class="prints-placeholder"><span>Image coming soon</span></div>
+      <div class="prints-meta"><p class="prints-neighborhood">Old Port</p><p class="prints-name">Coming soon</p><p class="prints-price">$50</p></div>
+    </div>
+    <div class="prints-item">
+      <div class="prints-placeholder"><span>Image coming soon</span></div>
+      <div class="prints-meta"><p class="prints-neighborhood">West End</p><p class="prints-name">Coming soon</p><p class="prints-price">$50</p></div>
+    </div>
+    <div class="prints-item">
+      <div class="prints-placeholder"><span>Image coming soon</span></div>
+      <div class="prints-meta"><p class="prints-neighborhood">Munjoy Hill</p><p class="prints-name">Coming soon</p><p class="prints-price">$50</p></div>
+    </div>
+    <div class="prints-item">
+      <div class="prints-placeholder"><span>Image coming soon</span></div>
+      <div class="prints-meta"><p class="prints-neighborhood">Arts District</p><p class="prints-name">Coming soon</p><p class="prints-price">$50</p></div>
+    </div>
+    <div class="prints-item">
+      <div class="prints-placeholder"><span>Image coming soon</span></div>
+      <div class="prints-meta"><p class="prints-neighborhood">East Bayside</p><p class="prints-name">Coming soon</p><p class="prints-price">$50</p></div>
+    </div>
+    <div class="prints-item">
+      <div class="prints-placeholder"><span>Image coming soon</span></div>
+      <div class="prints-meta"><p class="prints-neighborhood">Deering Center</p><p class="prints-name">Coming soon</p><p class="prints-price">$50</p></div>
+    </div>
+  </div>
+  <div class="wholesale-wrap">
+    <div class="wholesale-left">
+      <p class="eyebrow">For businesses</p>
+      <h3><em>Commission</em> your portrait</h3>
+      <p>Have your restaurant, shop, or business drawn by hand. A portrait of your space — for your walls, your staff, or your regulars. Minimum order and pricing on request.</p>
+      <button class="btn-primary" onclick="show('contact')">Get in touch</button>
+    </div>
+    <div class="wholesale-right">
+      <p class="eyebrow">For retailers</p>
+      <h3><em>Stock</em> our prints</h3>
+      <p>Carry Portland Prints in your store. A natural fit for gift shops, bookstores, and any Portland retailer looking for something locally made. Wholesale pricing available on minimum order.</p>
+      <button class="btn-green" onclick="show('contact')">Get in touch</button>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM WORK -->
+<section id="custom">
+  <div class="section-header">
+    <p class="eyebrow">Illustration & Design</p>
+    <h2 class="section-title">Custom Work</h2>
+  </div>
+  <div class="custom-intro">
+    <p>Every custom project starts from scratch — hand-drawn, digital, or a combination of both. From wedding invitations to brand identity, the work is built around what you actually need.</p>
+    <p>All commissions are quoted individually. Get in touch to start a conversation.</p>
+  </div>
+  <div class="custom-services">
+    <div class="custom-service">
+      <p class="eyebrow">01</p>
+      <h3 class="custom-service-title">Graphic design</h3>
+      <p class="custom-service-body">Print and digital design — advertisements, brochures, brand materials, and more. Fluent in Adobe Creative Cloud and experienced working with Maine-based brands.</p>
+    </div>
+    <div class="custom-service">
+      <p class="eyebrow">02</p>
+      <h3 class="custom-service-title">Illustration</h3>
+      <p class="custom-service-body">Custom hand-drawn or digital illustrations for editorial, branding, packaging, or personal use. Each piece is original and made specifically for you.</p>
+    </div>
+    <div class="custom-service">
+      <p class="eyebrow">03</p>
+      <h3 class="custom-service-title">Wedding & event stationery</h3>
+      <p class="custom-service-body">Custom illustrated invitations, menus, signage, and day-of materials. Hand-drawn or digital, designed around your aesthetic and printed to last.</p>
+    </div>
+  </div>
+  <div class="custom-grid">
+    <div class="custom-item">
+      <div class="custom-placeholder"><span>Image coming soon</span></div>
+      <div class="custom-meta"><p class="custom-cat">Wedding stationery</p><p class="custom-name">Coming soon</p></div>
+    </div>
+    <div class="custom-item">
+      <div class="custom-placeholder"><span>Image coming soon</span></div>
+      <div class="custom-meta"><p class="custom-cat">Illustration</p><p class="custom-name">Coming soon</p></div>
+    </div>
+    <div class="custom-item">
+      <div class="custom-placeholder"><span>Image coming soon</span></div>
+      <div class="custom-meta"><p class="custom-cat">Graphic design</p><p class="custom-name">Coming soon</p></div>
+    </div>
+    <div class="custom-item">
+      <div class="custom-placeholder"><span>Image coming soon</span></div>
+      <div class="custom-meta"><p class="custom-cat">Wedding stationery</p><p class="custom-name">Coming soon</p></div>
+    </div>
+  </div>
+  <div style="padding:3rem;border-top:0.5px solid var(--border);">
+    <button class="btn-primary" onclick="show('contact')">Start a custom project</button>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-image" style="padding:0;overflow:hidden;"><img src="about.jpg" alt="Haley Crocker, founder of Dancing Tomato Studio" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;"></div>
+    <div class="about-text">
+      <h2 class="section-title" style="margin-bottom:2rem;padding-bottom:2rem;border-bottom:0.5px solid var(--border);">About the studio</h2>
+      <p>Dancing Tomato Studio was founded by Haley Crocker — a Portland, Maine-based artist, designer, and maker with over 15 years of experience working across disciplines.</p>
+      <p>The work spans illustration, graphic design, and ceramics, connected by a commitment to craft, place, and making things that are genuinely worth keeping. The work is always original — conceived, made, and finished by hand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <h2>Let's make<br>something <em>together</em></h2>
+      <p>Whether you're after a custom commission, a wholesale inquiry, or just want to say hello — get in touch and we'll take it from there.</p>
+    </div>
+    <div class="contact-right">
+      <div class="form-field">
+        <label class="form-label">Your name</label>
+        <input class="form-input" type="text" placeholder="Full name">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="you@email.com">
+      </div>
+      <div class="form-field">
+        <label class="form-label">I'm interested in</label>
+        <select class="form-select">
+          <option value="">Select one</option>
+          <option>Ceramics</option>
+          <option>Portland Prints — retail</option>
+          <option>Portland Prints — wholesale / commission</option>
+          <option>Custom illustration</option>
+          <option>Graphic design</option>
+          <option>Wedding stationery</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Tell me about your project</label>
+        <textarea class="form-textarea" placeholder="What are you working on?"></textarea>
+      </div>
+      <button class="btn-primary">Send message</button>
+    </div>
+  </div>
+</section>
+<!-- POLICY -->
+<section id="policy">
+  <div style="max-width:680px;margin:0 auto;padding:5rem 3rem 6rem;">
+    
 
   <p class="policy-eyebrow">Legal</p>
   <h1 class="policy-title">Intellectual Property &amp; Copyright Policy</h1>
   <p class="policy-date">Effective date: June 2026</p>
 
   <div class="policy-highlight">
-    <p>All work created by Dancing Tomato Studio is original and protected by copyright law. No work may be copied, reproduced, or used without explicit written permission.</p>
+    <p>All work created by Dancing Tomato Studio — including ceramics, illustrations, prints, and graphic design — is original and protected by copyright law. No work may be copied, reproduced, or used without explicit written permission.</p>
   </div>
 
   <div class="policy-section">
     <h2>Ownership of work</h2>
-    <p>All surface patterns, designs, illustrations, concepts, and visual assets created by Dancing Tomato Studio are the sole intellectual property of Dancing Tomato Studio, unless explicitly transferred in writing through a signed licensing or work-for-hire agreement.</p>
-    <p>The creation of a pattern or design does not transfer ownership to the client until full payment has been received and a written transfer of rights has been executed.</p>
+    <p>All ceramics, illustrations, prints, graphic design, and visual assets created by Dancing Tomato Studio are the sole intellectual property of Dancing Tomato Studio, unless explicitly transferred in writing through a signed licensing or work-for-hire agreement.</p>
+    <p>The creation of any work does not transfer ownership to the client until full payment has been received and a written transfer of rights has been executed.</p>
   </div>
 
   <hr class="policy-divider">
@@ -137,12 +658,12 @@
     <h2>What is prohibited</h2>
     <p>Without prior written consent from Dancing Tomato Studio, the following are strictly prohibited:</p>
     <ul>
-      <li>Reproducing, copying, or tracing any design — in whole or in part</li>
-      <li>Using any design for commercial purposes without a valid license</li>
-      <li>Reselling, sublicensing, or redistributing any design to third parties</li>
-      <li>Modifying or creating derivative works based on any Dancing Tomato Studio design</li>
-      <li>Screenshotting, downloading, or saving designs from this website for use outside of personal reference</li>
-      <li>Claiming any Dancing Tomato Studio design as your own work</li>
+      <li>Reproducing, copying, or tracing any illustration, print, or design — in whole or in part</li>
+      <li>Using any work for commercial purposes without a valid license</li>
+      <li>Reselling, sublicensing, or redistributing any work to third parties</li>
+      <li>Modifying or creating derivative works based on any Dancing Tomato Studio original</li>
+      <li>Screenshotting, downloading, or saving images from this website for use outside of personal reference</li>
+      <li>Claiming any Dancing Tomato Studio work as your own</li>
     </ul>
   </div>
 
@@ -150,7 +671,7 @@
 
   <div class="policy-section">
     <h2>Client commissions</h2>
-    <p>When a client commissions a pattern, the scope of use is defined in the project agreement. Unless otherwise agreed in writing:</p>
+    <p>When a client commissions work, the scope of use is defined in the project agreement. Unless otherwise agreed in writing:</p>
     <ul>
       <li>Dancing Tomato Studio retains the right to display the work in its portfolio</li>
       <li>The client receives a license to use the design for the agreed purpose only</li>
@@ -163,22 +684,14 @@
 
   <div class="policy-section">
     <h2>Website content</h2>
-    <p>All content on this website — including but not limited to pattern designs, text, layout, and visual identity — is protected by copyright. Unauthorized use of any content from this site is a violation of applicable intellectual property laws and may result in legal action.</p>
+    <p>All content on this website — including but not limited to designs, illustrations, text, layout, and visual identity — is protected by copyright. Unauthorized use of any content from this site is a violation of applicable intellectual property laws and may result in legal action.</p>
   </div>
-
-  <hr class="policy-divider">
-
-  <div class="policy-section">
-    <h2>Reporting infringement</h2>
-    <p>If you believe your intellectual property rights have been violated, or if you become aware of any unauthorized use of Dancing Tomato Studio's work, please get in touch so we can address it promptly.</p>
-  </div>
-
 
   <hr class="policy-divider">
 
   <div class="policy-section">
     <h2>Mood boards, concepts &amp; early work</h2>
-    <p>Copyright protection applies to all stages of the creative process, not only finished designs. This includes but is not limited to:</p>
+    <p>Copyright protection applies to all stages of the creative process, not only finished work. This includes:</p>
     <ul>
       <li>Mood boards, color studies, and reference collections assembled for a project</li>
       <li>Initial sketches, rough concepts, and exploratory directions</li>
@@ -192,27 +705,26 @@
 
   <div class="policy-section">
     <h2>Social media &amp; public credit</h2>
-    <p>When sharing or publishing work created by Dancing Tomato Studio on social media, websites, press materials, or any other public platform, clients are required to credit Dancing Tomato Studio as the designer.</p>
-    <p>Accepted forms of credit include:</p>
+    <p>When sharing or publishing work created by Dancing Tomato Studio on social media, websites, or any other public platform, clients are required to credit Dancing Tomato Studio as the designer.</p>
     <ul>
       <li>Tagging <strong>@dancingtomatostudio</strong> on Instagram or other social platforms</li>
-      <li>Including "Pattern design by Dancing Tomato Studio" in captions or credits</li>
-      <li>Linking to <strong>dancingtomatostudio.com</strong> where text-based credit is appropriate</li>
+      <li>Including "Illustration/design by Dancing Tomato Studio" in captions or credits</li>
+      <li>Linking to <strong>dancingtomatostudio.com</strong> where appropriate</li>
     </ul>
-    <p>Failure to credit Dancing Tomato Studio when publishing commissioned work is a violation of our project terms and may affect future collaboration.</p>
   </div>
 
   <hr class="policy-divider">
 
   <div class="policy-section">
     <h2>Payment &amp; file release</h2>
-    <p>Final files are not released until payment has been received in full. This applies to all deliverables including pattern files, repeat files, color variations, and any other assets produced as part of a project.</p>
-    <ul>
-      <li>Work-in-progress files and previews shared during the project are for approval purposes only and do not constitute final delivery</li>
-      <li>Rights to use the work do not transfer until full payment has cleared</li>
-      <li>Any use of work-in-progress files prior to full payment and formal delivery is unauthorized</li>
-      <li>In the event of non-payment, Dancing Tomato Studio retains all rights to the work and may pursue recovery of fees owed</li>
-    </ul>
+    <p>For custom commissions and graphic design projects, final files and deliverables are not released until payment has been received in full. Rights to use the work do not transfer until full payment has cleared. In the event of non-payment, Dancing Tomato Studio retains all rights to the work.</p>
+  </div>
+
+  <hr class="policy-divider">
+
+  <div class="policy-section">
+    <h2>Reporting infringement</h2>
+    <p>If you believe your intellectual property rights have been violated, or if you become aware of any unauthorized use of Dancing Tomato Studio's work, please get in touch so we can address it promptly.</p>
   </div>
 
   <hr class="policy-divider">
@@ -222,12 +734,52 @@
     <p>This policy is governed by the copyright laws of the United States, including the Digital Millennium Copyright Act (DMCA). Dancing Tomato Studio reserves the right to pursue all available legal remedies in the event of infringement.</p>
   </div>
 
-</div>
+
+  </div>
+</section>
 
 <footer>
-  <p>© 2026 Dancing Tomato Studio</p>
-  <p>All rights reserved.</p>
+  <p>© 2026 Dancing Tomato Studio &nbsp;·&nbsp; Portland, Maine</p>
+  <div style="display:flex;gap:1.5rem;">
+    <a href="/portfolio.html" style="font-size:0.75rem;color:var(--muted);text-decoration:none;">Portfolio</a>
+    <a onclick="show('policy')" style="cursor:pointer;">Intellectual Property Policy</a>
+  </div>
 </footer>
 
+<script>
+
+
+
+function openMenu() { document.getElementById('mobileMenu').classList.add('open'); }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+function show(id) {
+  const bar = document.getElementById('announcement-bar');
+  if(bar) bar.style.display = id === 'home' ? 'block' : 'none';
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + id);
+  if(id === 'policy') window.scrollTo(0,0);
+  if(navEl) navEl.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function nextSlide(id) {
+  const imgs = document.querySelectorAll('#' + id + ' .carousel-img');
+  let active = 0;
+  imgs.forEach((img, i) => { if(img.style.display !== 'none') active = i; });
+  imgs[active].style.display = 'none';
+  imgs[(active + 1) % imgs.length].style.display = 'block';
+}
+function prevSlide(id) {
+  const imgs = document.querySelectorAll('#' + id + ' .carousel-img');
+  let active = 0;
+  imgs.forEach((img, i) => { if(img.style.display !== 'none') active = i; });
+  imgs[active].style.display = 'none';
+  imgs[(active - 1 + imgs.length) % imgs.length].style.display = 'block';
+}
+
+</script>
 </body>
 </html>
